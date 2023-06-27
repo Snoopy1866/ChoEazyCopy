@@ -24,44 +24,44 @@
     Loaded="Window_Loaded" Icon="App.ico" Closing="Window_Closing">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Controls:ToggleSwitch Margin="10, 0, 0, 0" Foreground="LightYellow" FontSize="16" ToolTip="Remember windows position/size."
+            <Controls:ToggleSwitch Margin="10, 0, 0, 0" Foreground="LightYellow" FontSize="16" ToolTip="记住窗口位置/大小"
                                    IsChecked="{Binding RememberWindowSizeAndPosition}"
                                    />
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
-            <Button x:Name="btnApplicationCmds" ToolTip="Application Commands" Click="btnApplicationCmds_Click"  >
+            <Button x:Name="btnApplicationCmds" ToolTip="应用程序命令" Click="btnApplicationCmds_Click"  >
                 <Image Source="{iconPacks:FontAwesomeImage Kind=CogSolid}" />
                 <Button.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="mnuLaunchNewInstance" Header="Launch New Instance" Click="mnuLaunchNewInstance_Click" >
+                        <MenuItem x:Name="mnuLaunchNewInstance" Header="启动新实例" Click="mnuLaunchNewInstance_Click" >
                             <MenuItem.Icon>
                                 <Image Source="Resources/OpenNewWindow.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem x:Name="mnuRunasAdministrator" Header="Run as Administrator" Click="mnuRunasAdministrator_Click" >
+                        <MenuItem x:Name="mnuRunasAdministrator" Header="以管理员身份运行" Click="mnuRunasAdministrator_Click" >
                             <MenuItem.Icon>
                                 <Image Source="Resources/Security.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem x:Name="mnuRegisterShellExtensions" Header="Register Shell Extensions" Click="mnuRegisterShellExtensions_Click">
+                        <MenuItem x:Name="mnuRegisterShellExtensions" Header="注册Shell扩展" Click="mnuRegisterShellExtensions_Click">
                             <MenuItem.Icon>
                                 <Image Source="Resources/Registry.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem x:Name="mnuUnregisterShellExtensions" Header="Unregister Shell Extensions" Click="mnuUnregisterShellExtensions_Click" >
+                        <MenuItem x:Name="mnuUnregisterShellExtensions" Header="取消注册Shell扩展" Click="mnuUnregisterShellExtensions_Click" >
                             <MenuItem.Icon>
                                 <Image Source="Resources/RemoveRegistry.png" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator></Separator>
-                        <MenuItem x:Name="mnuAlwaysOnTop" Header="Always on Top" IsCheckable="True" IsChecked="False" Click="mnuAlwaysOnTop_Click">
+                        <MenuItem x:Name="mnuAlwaysOnTop" Header="总是显示在上层" IsCheckable="True" IsChecked="False" Click="mnuAlwaysOnTop_Click">
                             <!--<MenuItem.Icon>
                                 <iconPacks:FontAwesome Kind="HandshakeRegular"></iconPacks:FontAwesome>
                             </MenuItem.Icon>-->
                         </MenuItem>
-                        <MenuItem x:Name="mnuRunatSystemsStartup" Header="Run at Systems Startup" IsCheckable="True" 
+                        <MenuItem x:Name="mnuRunatSystemsStartup" Header="系统启动时运行" IsCheckable="True" 
                                   Click="mnuRunatSystemsStartup_Click">
                             <!--<MenuItem.Icon>
                                 <iconPacks:FontAwesome Kind="ShieldAltSolid"></iconPacks:FontAwesome>
@@ -256,41 +256,41 @@
                     <Ribbon.ApplicationMenu>
                         <RibbonApplicationMenu Visibility="Collapsed"></RibbonApplicationMenu>
                     </Ribbon.ApplicationMenu>
-                    <RibbonTab Header="Home" KeyTip="H" ContextMenu="{x:Null}">
+                    <RibbonTab Header="开始" KeyTip="H" ContextMenu="{x:Null}">
                         <RibbonGroup x:Name="HomeGroup" Header="Action" ContextMenu="{x:Null}">
-                            <RibbonButton x:Name="btnRun" LargeImageSource="Resources\Run.png" Label="Run" KeyTip="R" Click="btnRun_Click"  ContextMenu="{x:Null}"/>
-                            <RibbonButton x:Name="btnStop" SmallImageSource="Resources\Stop.png" Label="Stop" KeyTip="T" Click="btnStop_Click"  ContextMenu="{x:Null}"/>
-                            <RibbonButton x:Name="btnClear" SmallImageSource="Resources\Erase.png" Label="Clear Output" KeyTip="E" Click="btnClear_Click"  ContextMenu="{x:Null}"/>
-                            <RibbonCheckBox x:Name="btnScrollOutput" SmallImageSource="Resources\Scroll.png" Label="Scroll Output" KeyTip="L" IsChecked="{Binding ScrollOutput}"  ContextMenu="{x:Null}"/>
+                            <RibbonButton x:Name="btnRun" LargeImageSource="Resources\Run.png" Label="运行" KeyTip="R" Click="btnRun_Click"  ContextMenu="{x:Null}"/>
+                            <RibbonButton x:Name="btnStop" SmallImageSource="Resources\Stop.png" Label="停止" KeyTip="T" Click="btnStop_Click"  ContextMenu="{x:Null}"/>
+                            <RibbonButton x:Name="btnClear" SmallImageSource="Resources\Erase.png" Label="清空输出窗口" KeyTip="E" Click="btnClear_Click"  ContextMenu="{x:Null}"/>
+                            <RibbonCheckBox x:Name="btnScrollOutput" SmallImageSource="Resources\Scroll.png" Label="滚动输出" KeyTip="L" IsChecked="{Binding ScrollOutput}"  ContextMenu="{x:Null}"/>
                         </RibbonGroup>
                         <RibbonGroup x:Name="FileGroup" Header="File" ContextMenu="{x:Null}">
                             <!--<RibbonButton x:Name="btnNewFile" LargeImageSource="Resources\NewFile.png" Label="New" KeyTip="N" Click="btnNewFile_Click"  ContextMenu="{x:Null}"/>-->
                             <RibbonMenuButton x:Name="btnNewFile" 
-                                    Label="New"
+                                    Label="新建"
                                     SmallImageSource="Resources\NewFile.png"
                                     LargeImageSource="Resources\NewFile.png" KeyTip="N" >
                                 <RibbonMenuItem 
-                                    Header="Empty Job"
+                                    Header="空任务"
                                     ImageSource="Resources\NewFile.png" Click="btnNewFile_Click"  ContextMenu="{x:Null}"/>
                                 <RibbonMenuItem 
-                                    Header="Synchronization Job"
+                                    Header="同步任务"
                                     ImageSource="Resources\SyncJob.png" ToolTip="With the Synchronization job all new and modified files of source folder are mirrored to destination folder. Files and folders which don't exist anymore in the source folder when the job runs will be deleted in the destination folder."
                                     Click="btnNewSyncFile_Click"  ContextMenu="{x:Null}" />
                                 <RibbonMenuItem 
-                                    Header="Copy Job"
+                                    Header="复制任务"
                                     ImageSource="Resources\CopyJob.png" ToolTip="With the Copy job all new and modified files of source folder are also copied to destination folder. However files and folders which previously has been copied to the destination folder but doesn't exist anymore when the job runs, will be kept in the destination folder."
                                     Click="btnNewCopyFile_Click"  ContextMenu="{x:Null}"/>
                                 <RibbonMenuItem 
-                                    Header="Move Job"
+                                    Header="移动任务"
                                     ImageSource="Resources\MoveJob.png" ToolTip="With the Move job, move all files/folders from source location to destination location. All successfull moved files/folders are removed from the source."
                                     Click="btnNewMoveFile_Click"  ContextMenu="{x:Null}"/>
                             </RibbonMenuButton>
-                            <RibbonButton x:Name="btnOpenFile" SmallImageSource="Resources\OpenFile.png" Label="Open" KeyTip="O" Click="btnOpenFile_Click"  ContextMenu="{x:Null}"/>
-                            <RibbonButton x:Name="btnSaveFile" SmallImageSource="Resources\SaveFile.png" Label="Save" KeyTip="S" Click="btnSaveFile_Click"  ContextMenu="{x:Null}"/>
-                            <RibbonButton x:Name="btnSaveAsFile" SmallImageSource="Resources\SaveAsFile.png" Label="Save As" KeyTip="A" Click="btnSaveAsFile_Click"  ContextMenu="{x:Null}"/>
+                            <RibbonButton x:Name="btnOpenFile" SmallImageSource="Resources\OpenFile.png" Label="打开" KeyTip="O" Click="btnOpenFile_Click"  ContextMenu="{x:Null}"/>
+                            <RibbonButton x:Name="btnSaveFile" SmallImageSource="Resources\SaveFile.png" Label="保存" KeyTip="S" Click="btnSaveFile_Click"  ContextMenu="{x:Null}"/>
+                            <RibbonButton x:Name="btnSaveAsFile" SmallImageSource="Resources\SaveAsFile.png" Label="另存为" KeyTip="A" Click="btnSaveAsFile_Click"  ContextMenu="{x:Null}"/>
                         </RibbonGroup>
                         <RibbonGroup x:Name="DonateGroup" ContextMenu="{x:Null}">
-                            <RibbonButton x:Name="btnDonate" LargeImageSource="Resources\Donate.png" Label="Donate" KeyTip="D" Click="BtnDonate_Click" ToolTip="Your support is much appreciated." ContextMenu="{x:Null}"/>
+                            <RibbonButton x:Name="btnDonate" LargeImageSource="Resources\Donate.png" Label="捐赠" KeyTip="D" Click="BtnDonate_Click" ToolTip="非常感谢您的支持" ContextMenu="{x:Null}"/>
                         </RibbonGroup>
                         <!--<RibbonGroup VerticalAlignment="Center" ContextMenu="{x:Null}">
                             <DockPanel LastChildFill="True">
@@ -302,7 +302,7 @@
                             </DockPanel>
                         </RibbonGroup>-->
                         <RibbonGroup x:Name="HelpGroup" ContextMenu="{x:Null}">
-                            <RibbonButton x:Name="btnHelp" LargeImageSource="Resources\Help.png" Label="Help" KeyTip="D" Click="btnHelp_Click" ToolTip="RoboCopy offical help" ContextMenu="{x:Null}"/>
+                            <RibbonButton x:Name="btnHelp" LargeImageSource="Resources\Help.png" Label="帮助" KeyTip="D" Click="btnHelp_Click" ToolTip="RoboCopy 官方帮助" ContextMenu="{x:Null}"/>
                         </RibbonGroup>
                     </RibbonTab>
                 </Ribbon>
@@ -325,7 +325,7 @@
                         </Grid.ColumnDefinitions>
                         <Border Margin="5,5,5,0" Grid.Row="0" BorderThickness="1" BorderBrush="Gray" Background="LightSlateGray" >
                             <DockPanel LastChildFill="true">
-                                <Label FontWeight="Bold" Foreground="{Binding ControlBackgroundBrush}">TASK FILE:</Label>
+                                <Label FontWeight="Bold" Foreground="{Binding ControlBackgroundBrush}" Content="任务文件:"/>
                                 <TextBlock Foreground="{Binding ControlBackgroundBrush}" VerticalAlignment="Center" Text="{Binding SettingsFileName}" ToolTip="{Binding SettingsFilePath}"></TextBlock>
                                 
                             </DockPanel>
@@ -339,11 +339,11 @@
                 >
                             <GroupBox.Header>
                                 <DockPanel LastChildFill="True">
-                                    <Button x:Name="btnSwapDir" DockPanel.Dock="Right" Content="Swap Directories" 
+                                    <Button x:Name="btnSwapDir" DockPanel.Dock="Right" Content="互换目录" 
                                         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                                         xmlns:Converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro" Click="btnSwapDir_Click"
                                     Style="{DynamicResource MetroButton}" />
-                                    <TextBlock Text="CHOOSE FOLDERS" VerticalAlignment="Center"
+                                    <TextBlock Text="选择文件夹" VerticalAlignment="Center"
                                         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                                         xmlns:Converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro">
                                         <TextBlock.Foreground>
@@ -372,7 +372,7 @@
                                     <RowDefinition />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <Label FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2">Source Directory</Label>
+                                <Label FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2" Content="源目录"/>
                                 <TextBox 
                         x:Name="txtSourceDirectory"
                         VerticalAlignment="Stretch"
@@ -393,7 +393,7 @@
                         Margin="1,0,1,2"
                         x:Name="btnSourceDirBrowse"
                         Click="btnSourceDirBrowse_Click"
-                        TabIndex="1" ToolTip="Choose source directory..." VerticalAlignment="Bottom">
+                        TabIndex="1" ToolTip="选择源目录..." VerticalAlignment="Bottom">
                                     <Image Source="Resources/OpenFolder.png" >
                                         <Image.Style>
                                             <Style TargetType="{x:Type Image}">
@@ -406,7 +406,7 @@
                                         </Image.Style>
                                     </Image>
                                 </Button>
-                                <Label FontWeight="Bold" Grid.Row="2" Grid.ColumnSpan="2">Destination Directory</Label>
+                                <Label FontWeight="Bold" Grid.Row="2" Grid.ColumnSpan="2" Content="目标目录"/>
                                 <TextBox
                         x:Name="txtDestDirectory" 
                         Grid.Row="3" 
@@ -424,7 +424,7 @@
                         Grid.Column="3"
                         Margin="1,2,1,1"
                         x:Name="btnDestDirBrowse"
-                        TabIndex="3" ToolTip="Choose destination directory..."
+                        TabIndex="3" ToolTip="选择目标目录..."
                                 Click="btnDestDirBrowse_Click" >
                                     <Image Source="Resources/OpenFolder.png" >
                                         <Image.Style>
@@ -445,7 +445,7 @@
                               IsEnabled="{Binding IsNotRunning}">
                         <GroupBox.Header>
                             <DockPanel LastChildFill="True">
-                                <CheckBox DockPanel.Dock="Right" Content="SHOW PROGRESS" IsChecked="{Binding Path=AppSettings.ShowRoboCopyProgress}"
+                                <CheckBox DockPanel.Dock="Right" Content="显示进度" IsChecked="{Binding Path=AppSettings.ShowRoboCopyProgress}"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:Converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro"
                                         Style="{DynamicResource MetroCheckBox}">
@@ -456,7 +456,7 @@
                                         </MultiBinding>
                                     </CheckBox.Foreground>
                                 </CheckBox>
-                                <TextBlock Text="ROBOCOPY PROGRESS" VerticalAlignment="Center"
+                                <TextBlock Text="ROBOCOPY 执行" VerticalAlignment="Center"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:Converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro">
                                     <TextBlock.Foreground>
@@ -500,7 +500,7 @@
                             VerticalAlignment="Stretch">
                             <GroupBox.Header>
                                 <DockPanel LastChildFill="True">
-                                    <CheckBox DockPanel.Dock="Right" Content="TEST RUN" IsChecked="{Binding Path=AppSettings.ListOnly}"
+                                    <CheckBox DockPanel.Dock="Right" Content="测试运行" IsChecked="{Binding Path=AppSettings.ListOnly}"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:Converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro"
                                         Style="{DynamicResource MetroCheckBox}">
@@ -511,7 +511,7 @@
                                             </MultiBinding>
                                         </CheckBox.Foreground>
                                     </CheckBox>
-                                    <TextBlock Text="ROBOCOPY COMMAND" VerticalAlignment="Center"
+                                    <TextBlock Text="ROBOCOPY 命令" VerticalAlignment="Center"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:Converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro">
                                         <TextBlock.Foreground>
@@ -554,7 +554,7 @@
                 VerticalAlignment="Stretch">
                             <GroupBox.Header>
                                 <DockPanel LastChildFill="True">
-                                    <CheckBox DockPanel.Dock="Right" Content="SHOW LINE NUMBERS" IsChecked="{Binding Path=AppSettings.ShowOutputLineNumbers}"
+                                    <CheckBox DockPanel.Dock="Right" Content="显示行号" IsChecked="{Binding Path=AppSettings.ShowOutputLineNumbers}"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:Converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro"
                                         Style="{DynamicResource MetroCheckBox}">
@@ -565,7 +565,7 @@
                                             </MultiBinding>
                                         </CheckBox.Foreground>
                                     </CheckBox>
-                                    <TextBlock Text="OUTPUT" VerticalAlignment="Center"
+                                    <TextBlock Text="输出" VerticalAlignment="Center"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:Converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro">
                                         <TextBlock.Foreground>
@@ -604,7 +604,7 @@
             <Expander Grid.Column="2" ExpandDirection="Left" IsExpanded="True" x:Name="expControlPanel"
                       ContextMenu="{StaticResource expControlPanelContextMenu}">
                 <Expander.Header>
-                    <TextBlock Text="Control Panel" Foreground="White" FontWeight="Bold">
+                    <TextBlock Text="控制面板" Foreground="White" FontWeight="Bold">
                         <TextBlock.LayoutTransform>
                             <RotateTransform Angle="90"/>
                         </TextBlock.LayoutTransform>
@@ -627,7 +627,7 @@
                             </Setter>
                         </Style>
                     </TabControl.Resources>
-                    <TabItem Header="RoboCopy Options" ToolTip="" x:Name="tabRoboCopyOptionsItem" >
+                    <TabItem Header="RoboCopy 选项" ToolTip="" x:Name="tabRoboCopyOptionsItem" >
                         <DockPanel LastChildFill="True">
                             <TextBlock DockPanel.Dock="Top" x:Name="txtPropertyGridWaterMark" FontSize="20" TextWrapping="WrapWithOverflow" FontWeight="Bold" 
                                        Foreground="Red" Text="{Binding PropertyGridTooltip}" ToolTip="{Binding PropertyGridTooltip}"
@@ -638,15 +638,15 @@
                                                          ToolTip="{Binding PropertyGridTooltip}"/>
                         </DockPanel>
                     </TabItem>
-                    <TabItem Header="Backup Tasks" x:Name="tabBackupTasks" ToolTip="" >
-                        <GroupBox Header="Backup Tasks" Margin="-3" x:Name="grpBackupTasks">
+                    <TabItem Header="备份任务" x:Name="tabBackupTasks" ToolTip="" >
+                        <GroupBox Header="备份任务" Margin="-3" x:Name="grpBackupTasks">
                             <DockPanel LastChildFill="True">
                                 <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch">
-                                    <TextBlock DockPanel.Dock="Top" FontWeight="Bold">Directory</TextBlock>
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="Bold" Text="目录"/>
                                     <DockPanel LastChildFill="True" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
                                         <Button Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Height="20"  Width="20" DockPanel.Dock="Right"
                                             x:Name="btnFindBackupTaskDirectoryInFileExplorer" 
-                                                ToolTip="Find backup task directory in file explorer" 
+                                                ToolTip="在资源管理器中查找备份任务目录" 
                                                 VerticalAlignment="Center"
                                                 Click="btnFindBackupTaskDirectoryInFileExplorer_Click" 
                                                 IsEnabled="{Binding BackupTaskDirStatus}">
@@ -665,7 +665,7 @@
                                         <Button Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Width="20" DockPanel.Dock="Right"
                                             Margin="1,0,1,2"
                                             x:Name="btnRefreshBackupTasks"
-                                            ToolTip="Reload backup tasks..." VerticalAlignment="Bottom"
+                                            ToolTip="重新载入备份任务..." VerticalAlignment="Bottom"
                                                 Click="btnRefreshBackupTasks_Click"
                                                 IsEnabled="{Binding BackupTaskDirStatus}"
                                                 >
@@ -684,7 +684,7 @@
                                         <Button Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  Width="20" DockPanel.Dock="Right"
                                             Margin="1,0,1,2"
                                             x:Name="btnBackupTaskDirectory"
-                                            ToolTip="Choose backup tasks directory..." VerticalAlignment="Bottom"
+                                            ToolTip="选择备份任务文件夹..." VerticalAlignment="Bottom"
                                                 Click="btnBackupTaskDirectory_Click"
                                                 >
                                             <Image Source="Resources/OpenFolder.png" >
@@ -723,19 +723,19 @@
                                 <DockPanel LastChildFill="True">
                                     <DockPanel LastChildFill="True" DockPanel.Dock="Bottom">
                                         <StackPanel Margin="0,5,0,0" Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Bottom" >
-                                            <Button Margin="5,0,0,0" x:Name="btnCloneTask" DockPanel.Dock="Right" Content="CLONE" IsEnabled="{Binding CloneTaskEnabled }"
+                                            <Button Margin="5,0,0,0" x:Name="btnCloneTask" DockPanel.Dock="Right" Content="克隆" IsEnabled="{Binding CloneTaskEnabled }"
                                                 Style="{DynamicResource MetroButton}" Click="btnCloneTask_Click" 
                                                     ToolTip="Clone task"/>
-                                            <Button Margin="5,5,0,0" x:Name="btnDeleteTask" DockPanel.Dock="Right" Content="DELETE" IsEnabled="{Binding DeleteTaskEnabled }"
+                                            <Button Margin="5,5,0,0" x:Name="btnDeleteTask" DockPanel.Dock="Right" Content="删除" IsEnabled="{Binding DeleteTaskEnabled }"
                                                 Style="{DynamicResource MetroButton}" Click="btnDeleteTask_Click" ToolTip="Delete task"/>
-                                            <Button Margin="5,5,0,0" x:Name="btnQueueTask" DockPanel.Dock="Right" Content="QUEUE" IsEnabled="{Binding QueueTaskEnabled }"
+                                            <Button Margin="5,5,0,0" x:Name="btnQueueTask" DockPanel.Dock="Right" Content="队列" IsEnabled="{Binding QueueTaskEnabled }"
                                                 Style="{DynamicResource MetroButton}" Click="btnQueueTask_Click"  ToolTip="Queue task"/>
                                         </StackPanel>
                                         <DockPanel LastChildFill="True">
-                                            <TextBlock DockPanel.Dock="Top" FontWeight="Bold">Backup Task Comments</TextBlock>
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="Bold" Text="备注"/>
                                             <TextBox x:Name="txtTaskComments" Margin="0,5,0,0" Height="70" VerticalScrollBarVisibility="Auto" 
                                                      TextWrapping="WrapWithOverflow"
-                                                     Text="{Binding Path=AppSettings.Comments, UpdateSourceTrigger=PropertyChanged}" ToolTip="Backup Task Comments" />
+                                                     Text="{Binding Path=AppSettings.Comments, UpdateSourceTrigger=PropertyChanged}" ToolTip="备份任务备注" />
                                         </DockPanel>
                                     </DockPanel>
                                     <ListView x:Name="lstBackupTasks" Margin="0,5,0,0" BorderThickness="1" BorderBrush="LightGray" VerticalAlignment="Stretch"
@@ -786,23 +786,23 @@
                                             <GridView AllowsColumnReorder="true" ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}">
                                                 <GridViewColumn x:Name="grdTaskNameColumn" Width="{Binding TaskNameColumnWidth}" DisplayMemberBinding="{Binding Path=TaskName}" 
                                                                 local:ChoGridViewSort.PropertyName="TaskName" >
-                                                    <GridViewColumnHeader x:Name="grdTaskNameColumnHeader" Content="TASK NAME" ContextMenu="{StaticResource grdHeaderContextMenu}" 
+                                                    <GridViewColumnHeader x:Name="grdTaskNameColumnHeader" Content="任务名称" ContextMenu="{StaticResource grdHeaderContextMenu}" 
                                                                           SizeChanged="TaskNameGridViewColumnHeader_SizeChanged" Tag="TaskName"
                                                                           MouseDown="GridViewColumnHeader_MouseDown" Click="grdBackupTaskColumnHeader_Click" />
                                                 </GridViewColumn>
                                                 <GridViewColumn x:Name="grdDateCreatedColumn" Width="{Binding DateCreatedColumnWidth}" 
-                                                                DisplayMemberBinding="{Binding Path=CreatedDate, StringFormat='dd-MMM-yyyy hh:mm:ss tt'}" 
+                                                                DisplayMemberBinding="{Binding Path=CreatedDate, StringFormat='yyyy-mm-dd hh:mm:ss tt'}" 
                                                                 local:ChoGridViewSort.PropertyName="CreatedDate" 
                                                                 local:ChoGridViewColumnVisibilityManager.IsVisible="{Binding DateCreatedVisibility}">
-                                                    <GridViewColumnHeader x:Name="grdDateCreatedColumnHeader" Content="DATE CREATED" ContextMenu="{StaticResource grdHeaderContextMenu}" 
+                                                    <GridViewColumnHeader x:Name="grdDateCreatedColumnHeader" Content="创建日期" ContextMenu="{StaticResource grdHeaderContextMenu}" 
                                                                           SizeChanged="DateCreatedGridViewColumnHeader_SizeChanged" Tag="CreatedDate"
                                                                           MouseDown="GridViewColumnHeader_MouseDown" Click="grdBackupTaskColumnHeader_Click" />
                                                 </GridViewColumn>
                                                 <GridViewColumn x:Name="grdDateModifiedColumn" Width="{Binding DateModifiedColumnWidth}" 
-                                                                DisplayMemberBinding="{Binding Path=ModifiedDate, StringFormat='dd-MMM-yyyy hh:mm:ss tt'}" 
+                                                                DisplayMemberBinding="{Binding Path=ModifiedDate, StringFormat='yyyy-mm-dd hh:mm:ss tt'}" 
                                                                 local:ChoGridViewSort.PropertyName="ModifiedDate" 
                                                                 local:ChoGridViewColumnVisibilityManager.IsVisible="{Binding DateModifiedVisibility}" >
-                                                    <GridViewColumnHeader x:Name="grdDateModifiedColumnHeader" Content="DATE MODIFIED" ContextMenu="{StaticResource grdHeaderContextMenu}" 
+                                                    <GridViewColumnHeader x:Name="grdDateModifiedColumnHeader" Content="修改日期" ContextMenu="{StaticResource grdHeaderContextMenu}" 
                                                                           SizeChanged="DateModifiedGridViewColumnHeader_SizeChanged" Tag="ModifiedDate"
                                                                           MouseDown="GridViewColumnHeader_MouseDown" Click="grdBackupTaskColumnHeader_Click"/>
                                                 </GridViewColumn>
@@ -817,21 +817,21 @@
                             </DockPanel>
                         </GroupBox>
                     </TabItem>
-                    <TabItem Header="Task Queue" x:Name="tabTaskQueue" ToolTip="" >
-                        <GroupBox Header="Task Queue" Margin="-3" x:Name="grpTaskQueue">
+                    <TabItem Header="任务队列" x:Name="tabTaskQueue" ToolTip="" >
+                        <GroupBox Header="任务队列" Margin="-3" x:Name="grpTaskQueue">
                             <DockPanel LastChildFill="True">
                                 <StackPanel Margin="0,5,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal" >
-                                    <Button Margin="0,0,0,0" x:Name="btnTaskQStopTask" Content="STOP" IsEnabled="{Binding TaskQStopTaskEnabled }"
+                                    <Button Margin="0,0,0,0" x:Name="btnTaskQStopTask" Content="停止" IsEnabled="{Binding TaskQStopTaskEnabled }"
                                             Style="{DynamicResource MetroButton}" Click="btnTaskQStopTask_Click" ToolTip="Stop task"/>
                                     <!--<Button Margin="5,0,0,0" x:Name="btnTaskQMoveUpTask" Content="MOVE UP" IsEnabled="{Binding TaskQMoveUpTaskEnabled }"
                                             Style="{DynamicResource MetroButton}" Click="btnTaskQMoveUpTask_Click"  ToolTip="Move Up task"/>
                                     <Button Margin="5,0,0,0" x:Name="btnTaskQMoveDownTask" Content="MOVE DOWN" IsEnabled="{Binding TaskQMoveDownTaskEnabled }"
                                             Style="{DynamicResource MetroButton}" Click="btnTaskQMoveDownTask_Click"  ToolTip="Move Down task"/>-->
-                                    <Button Margin="5,0,0,0" x:Name="btnTaskQRemoveTask" Content="REMOVE" IsEnabled="{Binding TaskQRemoveTaskEnabled }"
+                                    <Button Margin="5,0,0,0" x:Name="btnTaskQRemoveTask" Content="移除" IsEnabled="{Binding TaskQRemoveTaskEnabled }"
                                             Style="{DynamicResource MetroButton}" Click="btnTaskQRemoveTask_Click"  ToolTip="Remove task"/>
-                                    <Button Margin="5,0,0,0" x:Name="btnOpenTaskLogFile" DockPanel.Dock="Right" Content="OPEN LOG FILE" IsEnabled="{Binding OpenTaskLogFileEnabled }"
+                                    <Button Margin="5,0,0,0" x:Name="btnOpenTaskLogFile" DockPanel.Dock="Right" Content="打开日志文件" IsEnabled="{Binding OpenTaskLogFileEnabled }"
                                                 Style="{DynamicResource MetroButton}" Click="btnOpenTaskLogFile_Click"  ToolTip="Open task log file"/>
-                                    <Button Margin="5,0,0,0" x:Name="btnOpenTaskLogFolder" DockPanel.Dock="Right" Content="OPEN LOG FOLDER" IsEnabled="{Binding OpenTaskLogFolderEnabled }"
+                                    <Button Margin="5,0,0,0" x:Name="btnOpenTaskLogFolder" DockPanel.Dock="Right" Content="打开日志文件夹" IsEnabled="{Binding OpenTaskLogFolderEnabled }"
                                                 Style="{DynamicResource MetroButton}" Click="btnOpenTaskLogFolder_Click"  ToolTip="Open task log folder"/>
                                 </StackPanel>
                                 <ListView x:Name="lstTaskQueue" Margin="0,0,0,0" BorderThickness="1" BorderBrush="LightGray" VerticalAlignment="Stretch"
@@ -889,31 +889,31 @@
                                             </GridViewColumn>
                                             <GridViewColumn x:Name="grdTaskQNameColumn" Width="{Binding TaskQNameColumnWidth}" DisplayMemberBinding="{Binding Path=TaskName}" 
                                                                 local:ChoGridViewSort.PropertyName="TaskName" >
-                                                <GridViewColumnHeader x:Name="grdTaskQTaskNameColumnHeader" Content="TASK NAME" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
+                                                <GridViewColumnHeader x:Name="grdTaskQTaskNameColumnHeader" Content="任务名称" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
                                                                           SizeChanged="grdTaskQNameColumnHeader_SizeChanged"  Tag="TaskName"
                                                                           MouseDown="GridViewTaskQColumnHeader_MouseDown" Click="grdTaskQColumnHeader_Click" />
                                             </GridViewColumn>
                                             <GridViewColumn x:Name="grdTaskQQueueTimeColumn" Width="{Binding TaskQQueueTimeColumnWidth}" 
-                                                                DisplayMemberBinding="{Binding Path=QueueTime, StringFormat='dd-MMM-yyyy hh:mm:ss tt'}" 
+                                                                DisplayMemberBinding="{Binding Path=QueueTime, StringFormat='yyyy-mm-dd hh:mm:ss tt'}" 
                                                                 local:ChoGridViewSort.PropertyName="QueueTime" 
                                                                 local:ChoGridViewColumnVisibilityManager.IsVisible="{Binding QueueTime}">
-                                                <GridViewColumnHeader x:Name="grdTaskQQueueTimeColumnHeader" Content="QUEUE TIME" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
+                                                <GridViewColumnHeader x:Name="grdTaskQQueueTimeColumnHeader" Content="队列时间" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
                                                                           SizeChanged="grdTaskQQueueTimeColumnHeader_SizeChanged"  Tag="QueueTime"
                                                                           MouseDown="GridViewTaskQColumnHeader_MouseDown" Click="grdTaskQColumnHeader_Click" />
                                             </GridViewColumn>
                                             <GridViewColumn x:Name="grdTaskQStartTimeColumn" Width="{Binding TaskQStartTimeColumnWidth}" 
-                                                                DisplayMemberBinding="{Binding Path=StartTime, StringFormat='dd-MMM-yyyy hh:mm:ss tt'}" 
+                                                                DisplayMemberBinding="{Binding Path=StartTime, StringFormat='yyyy-mm-dd hh:mm:ss tt'}" 
                                                                 local:ChoGridViewSort.PropertyName="StartTime" 
                                                                 local:ChoGridViewColumnVisibilityManager.IsVisible="{Binding StartTime}">
-                                                <GridViewColumnHeader x:Name="grdTaskQStartTimeColumnHeader" Content="START TIME" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
+                                                <GridViewColumnHeader x:Name="grdTaskQStartTimeColumnHeader" Content="开始时间" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
                                                                           SizeChanged="grdTaskQStartTimeColumnHeader_SizeChanged"  Tag="StartTime"
                                                                           MouseDown="GridViewTaskQColumnHeader_MouseDown" Click="grdTaskQColumnHeader_Click" />
                                             </GridViewColumn>
                                             <GridViewColumn x:Name="grdTaskQEndTimeColumn" Width="{Binding DateModifiedColumnWidth}" 
-                                                                DisplayMemberBinding="{Binding Path=EndTime, StringFormat='dd-MMM-yyyy hh:mm:ss tt'}" 
+                                                                DisplayMemberBinding="{Binding Path=EndTime, StringFormat='yyyy-mm-dd hh:mm:ss tt'}" 
                                                                 local:ChoGridViewSort.PropertyName="EndTime" 
                                                                 local:ChoGridViewColumnVisibilityManager.IsVisible="{Binding EndTime}" >
-                                                <GridViewColumnHeader x:Name="grdTaskQEndTimeColumnHeader" Content="END TIME" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
+                                                <GridViewColumnHeader x:Name="grdTaskQEndTimeColumnHeader" Content="结束时间" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
                                                                           SizeChanged="grdTaskQEndTimeColumnHeader_SizeChanged"  Tag="EndTime"
                                                                           MouseDown="GridViewTaskQColumnHeader_MouseDown" Click="grdTaskQColumnHeader_Click"/>
                                             </GridViewColumn>
@@ -921,7 +921,7 @@
                                                                 DisplayMemberBinding="{Binding Path=Status}" 
                                                                 local:ChoGridViewSort.PropertyName="Status" 
                                                                 local:ChoGridViewColumnVisibilityManager.IsVisible="{Binding Status}" >
-                                                <GridViewColumnHeader x:Name="grdTaskQStatusColumnHeader" Content="STATUS" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
+                                                <GridViewColumnHeader x:Name="grdTaskQStatusColumnHeader" Content="状态" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
                                                                           SizeChanged="grdTaskQStatusColumnHeader_SizeChanged" Tag="Status"
                                                                           MouseDown="GridViewTaskQColumnHeader_MouseDown" Click="grdTaskQColumnHeader_Click"/>
                                             </GridViewColumn>
@@ -929,7 +929,7 @@
                                                                 DisplayMemberBinding="{Binding Path=ErrorMessage}" 
                                                                 local:ChoGridViewSort.PropertyName="Status" 
                                                                 local:ChoGridViewColumnVisibilityManager.IsVisible="{Binding ErrorMessage}" >
-                                                <GridViewColumnHeader x:Name="grdTaskQErrorMsgColumnHeader" Content="ERROR MSG" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
+                                                <GridViewColumnHeader x:Name="grdTaskQErrorMsgColumnHeader" Content="错误信息" ContextMenu="{StaticResource grdTaskQueueHeaderContextMenu}" 
                                                                           SizeChanged="grdTaskQErrorMsgColumnHeader_SizeChanged" Tag="ErrorMessage"
                                                                           MouseDown="GridViewTaskQColumnHeader_MouseDown" Click="grdTaskQColumnHeader_Click"/>
                                             </GridViewColumn>

@@ -57,7 +57,7 @@ namespace ChoEazyCopy
         private bool IsStopping = false;
         private bool _isRunning = false;
 
-        private string _defaultAppStatusText = "Ready";
+        private string _defaultAppStatusText = "就绪";
         private string _appStatusText;
         public string AppStatusText
         {
@@ -552,7 +552,7 @@ namespace ChoEazyCopy
                         }
                         else if (!_selectedBackupTaskFilePath.IsNullOrWhiteSpace())
                         {
-                            MessageBox.Show($"File `{_selectedBackupTaskFilePath}` does not exists.", Caption, MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show($"文件 `{_selectedBackupTaskFilePath}` 不存在。", Caption, MessageBoxButton.OK, MessageBoxImage.Warning);
                             NewSettingsFile(false);
                             ReloadBackupTasks();
                         }
@@ -1021,23 +1021,23 @@ namespace ChoEazyCopy
                     || Directory.Exists(txtSourceDirectory.Text)
                 )
             {
-                SourceDirTooltip = "Source directory.";
+                SourceDirTooltip = "源目录";
                 SourceDirStatus = true;
             }
             else
             {
-                SourceDirTooltip = $"Direcory not exists.";
+                SourceDirTooltip = $"目录不存在";
                 SourceDirStatus = false;
             }
             if (BackupTaskDirectory.IsNullOrWhiteSpace()
                     || Directory.Exists(BackupTaskDirectory)
             )
             {
-                BackupTaskDirTooltip = "Backup Tasks directory.";
+                BackupTaskDirTooltip = "备份任务目录";
             }
             else
             {
-                BackupTaskDirTooltip = $"Direcory not exists.";
+                BackupTaskDirTooltip = $"目录不存在";
             }
 
             if (BackupTaskDirectory.IsNullOrWhiteSpace()
@@ -1075,7 +1075,7 @@ namespace ChoEazyCopy
             if (IsRunning)
             {
                 //BakAppSettings = null;
-                PropertyGridTooltip = "Grid will be hidden while task running.";
+                PropertyGridTooltip = "任务运行时将隐藏控制面板";
             }
             else
             {
@@ -1107,7 +1107,7 @@ namespace ChoEazyCopy
         {
             ChoFolderBrowserDialog dlg1 = new ChoFolderBrowserDialog
             {
-                Description = "Choose source folder...",
+                Description = "选择源文件夹...",
                 ShowNewFolderButton = true,
                 ShowEditBox = true,
                 ShowBothFilesAndFolders = false,
@@ -1132,7 +1132,7 @@ namespace ChoEazyCopy
         {
             ChoFolderBrowserDialog dlg1 = new ChoFolderBrowserDialog
             {
-                Description = "Choose copy/move folder to...",
+                Description = "选择复制/移动到的目标文件夹...",
                 ShowNewFolderButton = true,
                 ShowEditBox = true,
                 ShowBothFilesAndFolders = false,
@@ -1179,7 +1179,7 @@ namespace ChoEazyCopy
                 _roboCopyManager.Progress += (sender, e) =>
                 {
                     RobocopyProgresssBarValue = (int)(((double)e._runningBytes / e._totalBytes) * 100);
-                    RobocopyProgresssText = $"Copied {e._runningFileCount:N0} of {e._totalFileCount:N0} files; Copied {FileSizeFormatter.FormatSize(e._runningBytes)} of {FileSizeFormatter.FormatSize(e._totalBytes)}";
+                    RobocopyProgresssText = $"已复制 {e._runningFileCount:N0} / {e._totalFileCount:N0} 个文件; 已复制 {FileSizeFormatter.FormatSize(e._runningBytes)} / {FileSizeFormatter.FormatSize(e._totalBytes)}";
                 };
 
                 _roboCopyManager.Process(appSettings);
@@ -1196,7 +1196,7 @@ namespace ChoEazyCopy
             {
                 IsRunning = false;
                 _roboCopyManager = null;
-                if (RobocopyProgresssText == "Analyzing roboopy operation...")
+                if (RobocopyProgresssText == "Analyzing Robocopy operation...")
                     RobocopyProgresssText = String.Empty;
             }
         }
@@ -1276,11 +1276,11 @@ namespace ChoEazyCopy
                 switch (value)
                 {
                     case ChoFileMoveAttributes.MoveFilesOnly:
-                        if (MessageBox.Show("Are you sure you wish to remove original file{s}? This CANNOT be undone!", Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
+                        if (MessageBox.Show("您确定要删除原始文件吗？此操作无法撤销！", Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
                             return;
                         break;
                     case ChoFileMoveAttributes.MoveDirectoriesAndFiles:
-                        if (MessageBox.Show("Are you sure you wish to remove original file{s} / folder(s)? This CANNOT be undone!", Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
+                        if (MessageBox.Show("您确定要删除原始文件/目录吗？此操作无法撤销！", Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
                             return;
                         break;
                     default:
@@ -1295,7 +1295,7 @@ namespace ChoEazyCopy
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show(@"Are you sure you want to stop the operation?", Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop, MessageBoxResult.No)
+            if (MessageBox.Show(@"您确定要停止处理吗？", Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop, MessageBoxResult.No)
                 == MessageBoxResult.No)
                 return;
 
@@ -1342,9 +1342,9 @@ namespace ChoEazyCopy
             {
                 string msg;
                 if (SettingsFilePath.IsNullOrWhiteSpace())
-                    msg = "Do you want to save settings changes to untitled?";
+                    msg = "是否要将设置更改保存为 untitled ？";
                 else
-                    msg = "Do you want to save settings changes to '{0}'?".FormatString(Path.GetFileName(SettingsFilePath));
+                    msg = "是否要将设置更改保存为 '{0}' ？".FormatString(Path.GetFileName(SettingsFilePath));
                 MessageBoxResult r = MessageBox.Show(msg, Caption, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 if (r == MessageBoxResult.Cancel)
                     return true;
@@ -1387,7 +1387,7 @@ namespace ChoEazyCopy
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed saving settings to file. {0}".FormatString(ex.Message), Caption, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("将设置保存到文件失败。{0}".FormatString(ex.Message), Caption, MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             finally
@@ -1547,7 +1547,7 @@ namespace ChoEazyCopy
             //_wndClosing = true;
             if (IsRunning)
             {
-                if (MessageBox.Show("File operation is in progress. Are you sure want to close the application?", Caption, MessageBoxButton.YesNo,
+                if (MessageBox.Show("文件处理正在进行中。您确定要关闭应用程序吗？", Caption, MessageBoxButton.YesNo,
                     MessageBoxImage.Stop) == MessageBoxResult.No)
                 {
                     e.Cancel = true;
@@ -1556,7 +1556,7 @@ namespace ChoEazyCopy
             }
             else
             {
-                if (MessageBox.Show("Are you sure want to close the application?", Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
+                if (MessageBox.Show("您确定要关闭应用程序吗？", Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
                 {
                     e.Cancel = true;
                     return;
@@ -1652,7 +1652,7 @@ namespace ChoEazyCopy
             {
                 ChoFolderBrowserDialog dlg1 = new ChoFolderBrowserDialog
                 {
-                    Description = "Choose Backup Tasks folder...",
+                    Description = "选择备份任务文件夹...",
                     ShowNewFolderButton = true,
                     ShowEditBox = true,
                     ShowBothFilesAndFolders = false,
@@ -1808,8 +1808,8 @@ namespace ChoEazyCopy
                 return;
 
             _taskQManager.Add(SelectedBackupTaskItem.TaskName, taskFilePath: SelectedBackupTaskFilePath,
-                onSuccess: t => UpdateStatus($"`{t.TaskName}` task queued successfully.", null),
-                onFailure: (t, e) => UpdateStatus($"`{t}` task failed to queue.", null)
+                onSuccess: t => UpdateStatus($"`{t.TaskName}` 任务排队成功。", null),
+                onFailure: (t, e) => UpdateStatus($"`{t}` 任务排队失败。", null)
                 );
         }
 
@@ -1847,7 +1847,7 @@ namespace ChoEazyCopy
                 MessageBoxResult result = MessageBoxResult.Yes;
                 if (ConfirmOnDelete)
                 {
-                    result = MessageBox.Show($"Are you sure you want to delete `{Path.GetFileName(SelectedBackupTaskFilePath)}` task?",
+                    result = MessageBox.Show($"您确定要删除 `{Path.GetFileName(SelectedBackupTaskFilePath)}` 任务？",
                         Caption, MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 }
 
@@ -1866,7 +1866,7 @@ namespace ChoEazyCopy
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Failed to delete `{Path.GetFileName(SelectedBackupTaskFilePath)}` task. {ex.Message}",
+                        MessageBox.Show($"删除 `{Path.GetFileName(SelectedBackupTaskFilePath)}` 任务失败。 {ex.Message}",
                             Caption, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
@@ -1922,7 +1922,7 @@ namespace ChoEazyCopy
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to clone `{Path.GetFileName(SelectedBackupTaskFilePath)}` task. {ex.Message}",
+                    MessageBox.Show($"克隆 `{Path.GetFileName(SelectedBackupTaskFilePath)}` 任务失败。 {ex.Message}",
                         Caption, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -2343,7 +2343,7 @@ namespace ChoEazyCopy
                     MessageBoxResult result = MessageBoxResult.Yes;
                     if (ConfirmOnDelete)
                     {
-                        result = MessageBox.Show($"Are you sure you want to remove `{Path.GetFileName(_selectedTaskQueueItem.TaskName)}` task?",
+                        result = MessageBox.Show($"您确定要删除 `{Path.GetFileName(_selectedTaskQueueItem.TaskName)}` 任务？",
                             Caption, MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     }
 
@@ -2355,7 +2355,7 @@ namespace ChoEazyCopy
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show($"Failed to remove `{Path.GetFileName(_selectedTaskQueueItem.TaskName)}` task. {ex.Message}",
+                            MessageBox.Show($"删除 `{Path.GetFileName(_selectedTaskQueueItem.TaskName)}` 任务失败。 {ex.Message}",
                                 Caption, MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }

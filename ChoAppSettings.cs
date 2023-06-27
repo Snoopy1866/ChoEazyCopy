@@ -226,9 +226,9 @@
         #region Instance Data Members (Common Options)
 
         string _roboCopyFilePath;
-        [Category("1. Common Options")]
-        [Description("RoboCopy file path.")]
-        [DisplayName("RoboCopyFilePath")]
+        [Category("1. 通用选项")]
+        [Description("RoboCopy 程序路径")]
+        [DisplayName("RoboCopy 程序路径")]
         [ChoPropertyInfo("roboCopyFilePath", DefaultValue = "RoboCopy.exe")]
         public string RoboCopyFilePath
         {
@@ -241,9 +241,9 @@
         }
 
         string _files;
-        [Category("1. Common Options")]
-        [Description("File(s) to copy (names/wildcards: default is \"*.*\").")]
-        [DisplayName("Files")]
+        [Category("1. 通用选项")]
+        [Description("要复制的文件（名称/通配符：默认为“*.*”）")]
+        [DisplayName("文件")]
         [ChoPropertyInfo("files", DefaultValue = "*.*")]
         public string Files
         {
@@ -256,9 +256,9 @@
         }
 
         string _additionalParams;
-        [Category("1. Common Options")]
-        [Description("Additional command line parameters (Optional).")]
-        [DisplayName("AdditionalParams")]
+        [Category("1. 通用选项")]
+        [Description("附加命令行参数（可选）")]
+        [DisplayName("附加参数")]
         [ChoPropertyInfo("additionalParams", DefaultValue = "")]
         public string AdditionalParams
         {
@@ -271,9 +271,9 @@
         }
 
         string _precommands;
-        [Category("1. Common Options")]
-        [Description("Specify MS-DOS commands to run before robocopy operations, separated by ; (Optional).")]
-        [DisplayName("PreCommands")]
+        [Category("1. 通用选项")]
+        [Description("指定在 robocopy 操作之前运行的 MS-DOS 命令，以 ; 分隔（可选）")]
+        [DisplayName("预处理命令")]
         [ChoPropertyInfo("precommands", DefaultValue = "")]
         [Editor(typeof(ChoMultilineTextBoxEditor), typeof(ChoMultilineTextBoxEditor))]
         public string Precommands
@@ -287,9 +287,9 @@
         }
 
         string _postcommands;
-        [Category("1. Common Options")]
-        [Description("Specify MS-DOS commands to run after robocopy operations, separated by ; (Optional).")]
-        [DisplayName("Postcommands")]
+        [Category("1. 通用选项")]
+        [Description("指定在 robocopy 操作之后运行的 MS-DOS 命令，以 ; 分隔（可选）")]
+        [DisplayName("后处理命令")]
         [ChoPropertyInfo("postcommands", DefaultValue = "")]
         [Editor(typeof(ChoMultilineTextBoxEditor), typeof(ChoMultilineTextBoxEditor))]
         public string Postcommands
@@ -303,9 +303,9 @@
         }
 
         string _comments;
-        [Category("1. Common Options")]
-        [Description("Short description of backup task.")]
-        [DisplayName("Comments")]
+        [Category("1. 通用选项")]
+        [Description("备份任务的简短描述")]
+        [DisplayName("备注")]
         [ChoPropertyInfo("comments", DefaultValue = "")]
         public string Comments
         {
@@ -322,9 +322,9 @@
         #region Instance Data Members (Source Options)
 
         bool _copyNoEmptySubDirectories;
-        [Category("2. Source Options")]
-        [Description("Copy subdirectories, but not empty ones. (/S).")]
-        [DisplayName("CopyNoEmptySubDirectories")]
+        [Category("2. 源目录选项")]
+        [Description("复制子目录，但不复制空的子目录 (/S)")]
+        [DisplayName("复制非空子目录")]
         [ChoPropertyInfo("copyNoEmptySubDirectories")]
         public bool CopyNoEmptySubDirectories
         {
@@ -337,9 +337,9 @@
         }
 
         bool _copySubDirectories;
-        [Category("2. Source Options")]
-        [Description("Copy subdirectories, including Empty ones. (/E).")]
-        [DisplayName("CopySubDirectories")]
+        [Category("2. 源目录选项")]
+        [Description("复制子目录，包括空的子目录 (/E)")]
+        [DisplayName("复制子目录")]
         [ChoPropertyInfo("copySubDirectories", DefaultValue = "true")]
         public bool CopySubDirectories
         {
@@ -353,9 +353,9 @@
         }
 
         string _copyFlags;
-        [Category("2. Source Options")]
-        [Description("What to copy for files (default is /COPY:DAT). (copyflags : D=Data, A=Attributes, T=Timestamps, S=Security=NTFS ACLs, O=Owner info, U=aUditing info). (/COPY:flags).")]
-        [DisplayName("CopyFlags")]
+        [Category("2. 源目录选项")]
+        [Description("要复制的文件内容 (默认为 /COPY:DAT)。 (复制标记 : D=数据, A=属性, T=时间戳, S=安全=NTFS ACLs, O=所有者信息, U=审核信息)。(/COPY:复制标记)")]
+        [DisplayName("复制标记")]
         [ChoPropertyInfo("copyFlags", DefaultValue = "Data,Attributes,Timestamps")]
         [Editor(typeof(CopyFlagsEditor), typeof(CopyFlagsEditor))]
         public string CopyFlags
@@ -369,9 +369,9 @@
         }
 
         bool _copyFilesWithSecurity;
-        [Category("2. Source Options")]
-        [Description("Copy files with security (equivalent to /COPY:DATS). (/SEC).")]
-        [DisplayName("CopyFilesWithSecurity")]
+        [Category("2. 源目录选项")]
+        [Description("复制具有安全性的文件 (等同于 /COPY:DATS)。 (/SEC)")]
+        [DisplayName("复制具有安全性的文件")]
         [ChoPropertyInfo("copyFilesWithSecurity")]
         public bool CopyFilesWithSecurity
         {
@@ -384,9 +384,9 @@
         }
 
         bool _copyDirTimestamp;
-        [Category("2. Source Options")]
-        [Description("Copy Directory Timestamps. (/DCOPY:T).")]
-        [DisplayName("CopyDirTimestamp")]
+        [Category("2. 源目录选项")]
+        [Description("复制目录时间戳。 (/DCOPY:T)")]
+        [DisplayName("复制目录时间戳")]
         [ChoPropertyInfo("copyDirTimestamp")]
         public bool CopyDirTimestamp
         {
@@ -399,9 +399,9 @@
         }
 
         bool _copyFilesWithFileInfo;
-        [Category("2. Source Options")]
-        [Description("Copy all file info (equivalent to /COPY:DATSOU). (/COPYALL).")]
-        [DisplayName("CopyFilesWithFileInfo")]
+        [Category("2. 源目录选项")]
+        [Description("复制所有文件信息 (等同于 /COPY:DATSOU)。 (/COPYALL)")]
+        [DisplayName("复制所有文件信息")]
         [ChoPropertyInfo("copyFilesWithFileInfo")]
         public bool CopyFilesWithFileInfo
         {
@@ -414,9 +414,9 @@
         }
 
         bool _copyFilesWithNoFileInfo;
-        [Category("2. Source Options")]
-        [Description("Copy no file info (useful with /PURGE). (/NOCOPY).")]
-        [DisplayName("CopyFilesWithNoFileInfo")]
+        [Category("2. 源目录选项")]
+        [Description("不复制任何文件信息 (与 /PURGE 一起使用)。 (/NOCOPY)")]
+        [DisplayName("不复制任何文件信息")]
         [ChoPropertyInfo("copyFilesWithNoFileInfo")]
         public bool CopyFilesWithNoFileInfo
         {
@@ -429,9 +429,9 @@
         }
 
         bool _copyOnlyFilesWithArchiveAttributes;
-        [Category("2. Source Options")]
-        [Description("Copy only files with the Archive attribute set. (/A).")]
-        [DisplayName("CopyOnlyFilesWithArchiveAttributes")]
+        [Category("2. 源目录选项")]
+        [Description("仅复制具有存档属性集的文件。 (/A)")]
+        [DisplayName("仅复制具有存档属性集的文件")]
         [ChoPropertyInfo("copyOnlyFilesWithArchiveAttributes")]
         public bool CopyOnlyFilesWithArchiveAttributes
         {
@@ -444,9 +444,9 @@
         }
 
         bool _copyOnlyFilesWithArchiveAttributesAndReset;
-        [Category("2. Source Options")]
-        [Description("Copy only files with the Archive attribute and reset it. (/M).")]
-        [DisplayName("CopyOnlyFilesWithArchiveAttributesAndReset")]
+        [Category("2. 源目录选项")]
+        [Description("仅复制具有存档属性的文件并重置存档属性。 (/M)")]
+        [DisplayName("仅复制具有存档属性的文件并重置存档属性")]
         [ChoPropertyInfo("copyOnlyFilesWithArchiveAttributesAndReset")]
         public bool CopyOnlyFilesWithArchiveAttributesAndReset
         {
@@ -459,9 +459,9 @@
         }
 
         uint _onlyCopyNLevels;
-        [Category("2. Source Options")]
-        [Description("Only copy the top n levels of the source directory tree. 0 - all levels. (/LEV:n).")]
-        [DisplayName("OnlyCopyNLevels")]
+        [Category("2. 源目录选项")]
+        [Description("仅复制源目录树的前 n 层。 0 - 任意层。 (/LEV:n)")]
+        [DisplayName("仅复制前 n 层")]
         [ChoPropertyInfo("onlyCopyNLevels")]
         public uint OnlyCopyNLevels
         {
@@ -474,9 +474,9 @@
         }
 
         uint _excludeFilesOlderThanNDays;
-        [Category("2. Source Options")]
-        [Description("MAXimum file AGE - exclude files older than n days/date. (/MAXAGE:n).")]
-        [DisplayName("ExcludeFilesOlderThanNDays")]
+        [Category("2. 源目录选项")]
+        [Description("最长的文件存在时间 - 排除早于 n 天/日期的文件。 (/MAXAGE:n)")]
+        [DisplayName("排除早于 n 天的文件")]
         [ChoPropertyInfo("excludeFilesOlderThanNDays")]
         public uint ExcludeFilesOlderThanNDays
         {
@@ -489,9 +489,9 @@
         }
 
         uint _excludeFilesNewerThanNDays;
-        [Category("2. Source Options")]
-        [Description("MINimum file AGE - exclude files newer than n days/date. (/MINAGE:n).")]
-        [DisplayName("ExcludeFilesNewerThanNDays")]
+        [Category("2. 源目录选项")]
+        [Description("最短的文件存在时间 - 排除晚于 n 天/日期的文件。 (/MINAGE:n)")]
+        [DisplayName("排除晚于 n 天的文件")]
         [ChoPropertyInfo("excludeFilesNewerThanNDays")]
         public uint ExcludeFilesNewerThanNDays
         {
@@ -504,9 +504,9 @@
         }
 
         bool _assumeFATFileTimes;
-        [Category("2. Source Options")]
-        [Description("assume FAT File Times (2-second granularity). (/FFT).")]
-        [DisplayName("AssumeFATFileTimes")]
+        [Category("2. 源目录选项")]
+        [Description("假设 FAT 文件时间(2 秒粒度)。 (/FFT)")]
+        [DisplayName("假设 FAT 文件时间")]
         [ChoPropertyInfo("assumeFATFileTimes")]
         public bool AssumeFATFileTimes
         {
@@ -519,9 +519,9 @@
         }
 
         bool _turnOffLongPath;
-        [Category("2. Source Options")]
-        [Description("Turn off very long path (> 256 characters) support. (/256).")]
-        [DisplayName("TurnOffLongPath")]
+        [Category("2. 源目录选项")]
+        [Description("关闭超长路径(> 256 个字符)支持。 (/256)")]
+        [DisplayName("关闭超长路径支持")]
         [ChoPropertyInfo("turnOffLongPath")]
         public bool TurnOffLongPath
         {
@@ -538,9 +538,9 @@
         #region Instance Data Members (Destination Options)
 
         string _addFileAttributes;
-        [Category("3. Destination Options")]
-        [Description("Add the given attributes to copied files. (/A+:[RASHCNET]).")]
-        [DisplayName("AddFileAttributes")]
+        [Category("3. 目标目录选项")]
+        [Description("将给定的属性添加到复制的文件。 (/A+:[RASHCNET])")]
+        [DisplayName("添加文件属性")]
         [ChoPropertyInfo("addFileAttributes", DefaultValue = "")]
         [Editor(typeof(FileAttributesEditor), typeof(FileAttributesEditor))]
         public string AddFileAttributes
@@ -554,9 +554,9 @@
         }
 
         string _removeFileAttributes;
-        [Category("3. Destination Options")]
-        [Description("Remove the given Attributes from copied files. (/A-:[RASHCNET]).")]
-        [DisplayName("RemoveFileAttributes")]
+        [Category("3. 目标目录选项")]
+        [Description("从复制的文件中删除给定的属性。 (/A-:[RASHCNET])")]
+        [DisplayName("删除文件属性")]
         [ChoPropertyInfo("removeFileAttributes", DefaultValue = "")]
         [Editor(typeof(FileAttributesEditor), typeof(FileAttributesEditor))]
         public string RemoveFileAttributes
@@ -570,9 +570,9 @@
         }
 
         bool _createFATFileNames;
-        [Category("3. Destination Options")]
-        [Description("Create destination files using 8.3 FAT file names only. (/FAT).")]
-        [DisplayName("CreateFATFileNames")]
+        [Category("3. 目标目录选项")]
+        [Description("仅使用 8.3 FAT 文件名创建目标文件。 (/FAT)")]
+        [DisplayName("创建 FAT 文件名")]
         [ChoPropertyInfo("createFATFileNames")]
         public bool CreateFATFileNames
         {
@@ -585,9 +585,9 @@
         }
 
         bool _createDirTree;
-        [Category("3. Destination Options")]
-        [Description("Create directory tree and zero-length files only. (/CREATE).")]
-        [DisplayName("CreateDirTree")]
+        [Category("3. 目标目录选项")]
+        [Description("仅创建目录树和长度为零的文件。 (/CREATE)")]
+        [DisplayName("创建目录树")]
         [ChoPropertyInfo("createDirTree")]
         public bool CreateDirTree
         {
@@ -600,9 +600,9 @@
         }
 
         bool _compensateOneHourDSTTimeDiff;
-        [Category("3. Destination Options")]
-        [Description("Compensate for one-hour DST time differences. (/DST).")]
-        [DisplayName("CompensateOneHourDSTTimeDiff")]
+        [Category("3. 目标目录选项")]
+        [Description("弥补 1 小时的 DST 时间差。 (/DST)")]
+        [DisplayName("弥补 1 小时的 DST 时间差")]
         [ChoPropertyInfo("compensateOneHourDSTTimeDiff")]
         public bool CompensateOneHourDSTTimeDiff
         {
@@ -619,9 +619,9 @@
         #region Instance Data Members (Copy Options)
 
         bool _listOnly;
-        [Category("4. Copy Options")]
-        [Description("List only - don't copy, timestamp or delete any files. (/L).")]
-        [DisplayName("ListOnly")]
+        [Category("4. 复制选项")]
+        [Description("仅列出 - 不复制、添加时间戳或删除任何文件。 (/L)")]
+        [DisplayName("仅列出")]
         [ChoPropertyInfo("listOnly")]
         public bool ListOnly
         {
@@ -634,9 +634,9 @@
         }
 
         string _moveFilesAndDirectories;
-        [Category("4. Copy Options")]
-        [Description("Move files and dirs (delete from source after copying). (/MOV or /MOVE).")]
-        [DisplayName("MoveFilesAndDirectories")]
+        [Category("4. 复制选项")]
+        [Description("移动文件(复制后从源中删除)。 (/MOV or /MOVE)")]
+        [DisplayName("移动文件和目录")]
         [ChoPropertyInfo("moveFilesAndDirectories", DefaultValue = "None")]
         [Editor(typeof(FileMoveSelectionAttributesEditor), typeof(FileMoveSelectionAttributesEditor))]
         public string MoveFilesAndDirectories
@@ -657,9 +657,9 @@
 
 
         bool _copySymbolicLinks;
-        [Category("4. Copy Options")]
-        [Description("Copy symbolic links versus the target. (/SL).")]
-        [DisplayName("CopySymbolicLinks")]
+        [Category("4. 复制选项")]
+        [Description("将符号链接复制为链接而非链接目标。 (/SL)")]
+        [DisplayName("复制符号链接")]
         [ChoPropertyInfo("copySymbolicLinks")]
         public bool CopySymbolicLinks
         {
@@ -672,9 +672,9 @@
         }
 
         bool _copyFilesRestartableMode;
-        [Category("4. Copy Options")]
-        [Description("Copy files in restartable mode. (/Z).")]
-        [DisplayName("CopyFilesRestartableMode")]
+        [Category("4. 复制选项")]
+        [Description("在可重新启动模式下复制文件。 (/Z)")]
+        [DisplayName("可重新启动模式")]
         [ChoPropertyInfo("copyFilesRestartableMode")]
         public bool CopyFilesRestartableMode
         {
@@ -687,9 +687,9 @@
         }
 
         bool _copyFilesBackupMode;
-        [Category("4. Copy Options")]
-        [Description("Copy files in Backup mode. (/B).")]
-        [DisplayName("CopyFilesBackupMode")]
+        [Category("4. 复制选项")]
+        [Description("在备份模式下复制文件。 (/B)")]
+        [DisplayName("备份模式")]
         [ChoPropertyInfo("copyFilesBackupMode")]
         public bool CopyFilesBackupMode
         {
@@ -702,9 +702,9 @@
         }
 
         bool _unbufferredIOCopy;
-        [Category("4. Copy Options")]
-        [Description("Copy using unbuffered I/O (recommended for large files). (/J)")]
-        [DisplayName("UnbufferredIOCopy")]
+        [Category("4. 复制选项")]
+        [Description("复制时使用未缓冲的 I/O (推荐在复制大文件时使用)。 (/J)")]
+        [DisplayName("非缓冲的 I/O")]
         [ChoPropertyInfo("unbufferredIOCopy")]
         public bool UnbufferredIOCopy
         {
@@ -717,9 +717,9 @@
         }
 
         bool _copyWithoutWindowsCopyOffload;
-        [Category("4. Copy Options")]
-        [Description("Copy files without using the Windows Copy Offload mechanism. (/NOOFFLOAD).")]
-        [DisplayName("CopyWithoutWindowsCopyOffload")]
+        [Category("4. 复制选项")]
+        [Description("在不使用 Windows 复制卸载机制的情况下复制文件。 (/NOOFFLOAD)")]
+        [DisplayName("不使用 Windows 复制卸载机制")]
         [ChoPropertyInfo("copyWithoutWindowsCopyOffload")]
         public bool CopyWithoutWindowsCopyOffload
         {
@@ -732,9 +732,9 @@
         }
 
         bool _encrptFileEFSRawMode;
-        [Category("4. Copy Options")]
-        [Description("Copy all encrypted files in EFS RAW mode. (/EFSRAW).")]
-        [DisplayName("EncrptFileEFSRawMode")]
+        [Category("4. 复制选项")]
+        [Description("在 EFS RAW 模式下复制所有加密的文件。 (/EFSRAW)")]
+        [DisplayName("EFS RAW 模式")]
         [ChoPropertyInfo("encrptFileEFSRawMode")]
         public bool EncrptFileEFSRawMode
         {
@@ -747,9 +747,9 @@
         }
 
         bool _fixFileTimeOnFiles;
-        [Category("4. Copy Options")]
-        [Description("Fix file times on all files, even skipped files. (/TIMFIX).")]
-        [DisplayName("FixFileTimeOnFiles")]
+        [Category("4. 复制选项")]
+        [Description("修复所有文件的文件时间，即使是跳过的文件。 (/TIMFIX)")]
+        [DisplayName("修复文件时间")]
         [ChoPropertyInfo("fixFileTimeOnFiles")]
         public bool FixFileTimeOnFiles
         {
@@ -762,9 +762,9 @@
         }
 
         bool _excludeOlderFiles;
-        [Category("4. Copy Options")]
-        [Description("eXclude Older files. (/XO).")]
-        [DisplayName("ExcludeOlderFiles")]
+        [Category("4. 复制选项")]
+        [Description("排除较旧的文件。 (/XO)")]
+        [DisplayName("排除较旧的文件")]
         [ChoPropertyInfo("excludeOlderFiles")]
         public bool ExcludeOlderFiles
         {
@@ -777,9 +777,9 @@
         }
 
         bool _excludeChangedFiles;
-        [Category("4. Copy Options")]
-        [Description("eXclude Changed files. (/XC).")]
-        [DisplayName("ExcludeChangedFiles")]
+        [Category("4. 复制选项")]
+        [Description("排除已更改的文件。 (/XC)")]
+        [DisplayName("排除已更改的文件")]
         [ChoPropertyInfo("excludeChangedFiles")]
         public bool ExcludeChangedFiles
         {
@@ -792,9 +792,9 @@
         }
 
         bool _excludeNewerFiles;
-        [Category("4. Copy Options")]
-        [Description("eXclude Newer files. (/XN).")]
-        [DisplayName("ExcludeNewerFiles")]
+        [Category("4. 复制选项")]
+        [Description("排除较新的文件。 (/XN)")]
+        [DisplayName("排除较新的文件")]
         [ChoPropertyInfo("excludeNewerFiles")]
         public bool ExcludeNewerFiles
         {
@@ -807,9 +807,9 @@
         }
 
         bool _excludeExtraFilesAndDirs;
-        [Category("4. Copy Options")]
-        [Description("eXclude eXtra files and directories. (/XX).")]
-        [DisplayName("ExcludeExtraFilesAndDirs")]
+        [Category("4. 复制选项")]
+        [Description("排除多余的文件和目录。 (/XX)")]
+        [DisplayName("排除多余的文件和目录")]
         [ChoPropertyInfo("excludeExtraFilesAndDirs")]
         public bool ExcludeExtraFilesAndDirs
         {
@@ -822,9 +822,9 @@
         }
 
         string _excludeFilesWithGivenNames;
-        [Category("4. Copy Options")]
-        [Description("eXclude Files matching given names/paths/wildcards. Separate names with ;. (/XF).")]
-        [DisplayName("ExcludeFilesWithGivenNames")]
+        [Category("4. 复制选项")]
+        [Description("排除与给定名称/路径/通配符匹配的文件。以 ; 分隔。 (/XF)")]
+        [DisplayName("排除与给定名称/路径/通配符匹配的文件")]
         [ChoPropertyInfo("excludeFilesWithGivenNames", DefaultValue = "")]
         [Editor(typeof(ChoPropertyGridFilePicker), typeof(ChoPropertyGridFilePicker))]
         public string ExcludeFilesWithGivenNames
@@ -838,9 +838,9 @@
         }
 
         string _excludeDirsWithGivenNames;
-        [Category("4. Copy Options")]
-        [Description("eXclude Directories matching given names/paths. Separate names with ;. (/XD).")]
-        [DisplayName("ExcludeDirsWithGivenNames")]
+        [Category("4. 复制选项")]
+        [Description("排除与给定名称/路径匹配的目录。以 ; 分隔。 (/XD)")]
+        [DisplayName("排除与给定名称/路径匹配的目录")]
         [ChoPropertyInfo("excludeDirsWithGivenNames", DefaultValue = "")]
         [Editor(typeof(ChoPropertyGridFolderPicker), typeof(ChoPropertyGridFolderPicker))]
         public string ExcludeDirsWithGivenNames
@@ -854,9 +854,9 @@
         }
 
         string _includeFilesWithGivenAttributes;
-        [Category("4. Copy Options")]
-        [Description("Include only files with any of the given Attributes set. (/IA:[RASHCNETO]).")]
-        [DisplayName("IncludeFilesWithGivenAttributes")]
+        [Category("4. 复制选项")]
+        [Description("仅包含具有任意给定属性集的文件。 (/IA:[RASHCNETO])")]
+        [DisplayName("仅包含具有任意给定属性集的文件")]
         [ChoPropertyInfo("includeFilesWithGivenAttributes", DefaultValue = "")]
         [Editor(typeof(FileSelectionAttributesEditor), typeof(FileSelectionAttributesEditor))]
         public string IncludeFilesWithGivenAttributes
@@ -870,9 +870,9 @@
         }
 
         string _excludeFilesWithGivenAttributes;
-        [Category("4. Copy Options")]
-        [Description("eXclude files with any of the given Attributes set. (/XA:[RASHCNETO]).")]
-        [DisplayName("ExcludeFilesWithGivenAttributes")]
+        [Category("4. 复制选项")]
+        [Description("排除具有任意给定属性集的文件。 (/XA:[RASHCNETO])")]
+        [DisplayName("排除具有任意给定属性集的文件")]
         [ChoPropertyInfo("excludeFilesWithGivenAttributes", DefaultValue = "")]
         [Editor(typeof(FileSelectionAttributesEditor), typeof(FileSelectionAttributesEditor))]
         public string ExcludeFilesWithGivenAttributes
@@ -886,9 +886,9 @@
         }
 
         bool _overrideModifiedFiles;
-        [Category("4. Copy Options")]
-        [Description("Include Modified files (differing change times). Otherwise the same. These files are not copied by default;. (/IM).")]
-        [DisplayName("OverrideModifiedFiles")]
+        [Category("4. 复制选项")]
+        [Description("包含已修改的文件(更改时间不同)。否则，默认情况下不会复制相同的文件。 (/IM)")]
+        [DisplayName("覆盖已修改的文件")]
         [ChoPropertyInfo("overrideModifiedFiles")]
         public bool OverrideModifiedFiles
         {
@@ -901,9 +901,9 @@
         }
 
         bool _includeSameFiles;
-        [Category("4. Copy Options")]
-        [Description("Include Same files. Overwrite files even if they are already the same. (/IS).")]
-        [DisplayName("IncludeSameFiles")]
+        [Category("4. 复制选项")]
+        [Description("包含相同文件。覆盖文件，即使它们已经相同。 (/IS)")]
+        [DisplayName("包含相同文件")]
         [ChoPropertyInfo("includeSameFiles")]
         public bool IncludeSameFiles
         {
@@ -916,9 +916,9 @@
         }
 
         bool _includeTweakedFiles;
-        [Category("4. Copy Options")]
-        [Description("Include Tweaked files. (/IT).")]
-        [DisplayName("IncludeTweakedFiles")]
+        [Category("4. 复制选项")]
+        [Description("包含已调整的文件。 (/IT)")]
+        [DisplayName("包含已调整的文件")]
         [ChoPropertyInfo("includeTweakedFiles")]
         public bool IncludeTweakedFiles
         {
@@ -931,9 +931,9 @@
         }
 
         bool _excludeJunctionPoints;
-        [Category("4. Copy Options")]
-        [Description("eXclude Junction points and symbolic links. (normally included by default). (/XJ).")]
-        [DisplayName("ExcludeJunctionPoints")]
+        [Category("4. 复制选项")]
+        [Description("排除(文件和目录的)符号链接和接合点。(通常默认不排除)。 (/XJ)")]
+        [DisplayName("排除(文件和目录的)符号链接和接合点")]
         [ChoPropertyInfo("excludeJunctionPoints")]
         public bool ExcludeJunctionPoints
         {
@@ -946,9 +946,9 @@
         }
 
         bool _excludeJunctionPointsForDirs;
-        [Category("4. Copy Options")]
-        [Description("eXclude Junction points and symbolic links for source directories. (/XJD).")]
-        [DisplayName("ExcludeJunctionPointsForDirs")]
+        [Category("4. 复制选项")]
+        [Description("排除目录的符号链接和接合点。 (/XJD)")]
+        [DisplayName("排除目录的符号链接和接合点")]
         [ChoPropertyInfo("excludeJunctionPointsForDirs")]
         public bool ExcludeJunctionPointsForDirs
         {
@@ -961,9 +961,9 @@
         }
 
         bool _excludeJunctionPointsForFiles;
-        [Category("4. Copy Options")]
-        [Description("eXclude symbolic links for source files. (/XJF).")]
-        [DisplayName("ExcludeJunctionPointsForFiles")]
+        [Category("4. 复制选项")]
+        [Description("排除文件的符号链接和接合点。 (/XJF)")]
+        [DisplayName("排除目录的符号链接和接合点")]
         [ChoPropertyInfo("excludeJunctionPointsForFiles")]
         public bool ExcludeJunctionPointsForFiles
         {
@@ -976,9 +976,9 @@
         }
 
         uint _excludeFilesBiggerThanNBytes;
-        [Category("4. Copy Options")]
-        [Description("MAXimum file size - exclude files bigger than n bytes. (/MAX:n).")]
-        [DisplayName("ExcludeFilesBiggerThanNBytes")]
+        [Category("4. 复制选项")]
+        [Description("最大的文件大小 - 排除大于 n 字节的文件。 (/MAX:n)。")]
+        [DisplayName("排除大于 n 字节的文件")]
         [ChoPropertyInfo("excludeFilesBiggerThanNBytes")]
         public uint ExcludeFilesBiggerThanNBytes
         {
@@ -991,9 +991,9 @@
         }
 
         uint _excludeFilesSmallerThanNBytes;
-        [Category("4. Copy Options")]
-        [Description("MINimum file size - exclude files smaller than n bytes. (/MIN:n).")]
-        [DisplayName("ExcludeFilesSmallerThanNBytes")]
+        [Category("4. 复制选项")]
+        [Description("最小的文件大小 - 排除小于 n 字节的文件。 (/MIN:n)")]
+        [DisplayName("排除小于 n 字节的文件")]
         [ChoPropertyInfo("excludeFilesSmallerThanNBytes")]
         public uint ExcludeFilesSmallerThanNBytes
         {
@@ -1006,9 +1006,9 @@
         }
 
         uint _excludeFilesUnusedSinceNDays;
-        [Category("4. Copy Options")]
-        [Description("MAXimum Last Access Date - exclude files unused since n. (/MAXLAD:n).")]
-        [DisplayName("ExcludeFilesUnusedSinceNDays")]
+        [Category("4. 复制选项")]
+        [Description("最大的最后访问日期 - 排除自 n 以来未使用的文件。 (/MAXLAD:n)")]
+        [DisplayName("排除自 n 以来未使用的文件")]
         [ChoPropertyInfo("excludeFilesUnusedSinceNDays")]
         public uint ExcludeFilesUnusedSinceNDays
         {
@@ -1021,9 +1021,9 @@
         }
 
         uint _excludeFilesUsedSinceNDays;
-        [Category("4. Copy Options")]
-        [Description("MINimum Last Access Date - exclude files used since n. (If n < 1900 then n = n days, else n = YYYYMMDD date). (/MINLAD:n).")]
-        [DisplayName("ExcludeFilesUsedSinceNDays")]
+        [Category("4. 复制选项")]
+        [Description("最小的最后访问日期 - 排除自 n 以来使用的文件。 (If n < 1900 then n = n days, else n = YYYYMMDD date)。 (/MINLAD:n)")]
+        [DisplayName("排除自 n 以来使用的文件")]
         [ChoPropertyInfo("excludeFilesUsedSinceNDays")]
         public uint ExcludeFilesUsedSinceNDays
         {
@@ -1036,9 +1036,9 @@
         }
 
         bool _mirrorDirTree;
-        [Category("4. Copy Options")]
-        [Description("Mirror a directory tree (equivalent to /E plus /PURGE). (/MIR).")]
-        [DisplayName("MirrorDirTree")]
+        [Category("4. 复制选项")]
+        [Description("镜像目录树(等同于 /E 加 /PURGE)。 (/MIR)")]
+        [DisplayName("镜像目录树")]
         [ChoPropertyInfo("mirrorDirTree")]
         public bool MirrorDirTree
         {
@@ -1051,9 +1051,9 @@
         }
 
         bool _delDestFileDirIfNotExistsInSource;
-        [Category("4. Copy Options")]
-        [Description("Delete dest files/dirs that no longer exist in source. (/PURGE).")]
-        [DisplayName("DelDestFileDirIfNotExistsInSource")]
+        [Category("4. 复制选项")]
+        [Description("删除源中不再存在的目标文件/目录。 (/PURGE)")]
+        [DisplayName("删除源中不再存在的目标文件/目录")]
         [ChoPropertyInfo("delDestFileDirIfNotExistsInSource")]
         public bool DelDestFileDirIfNotExistsInSource
         {
@@ -1066,9 +1066,9 @@
         }
 
         bool _excludeLonelyFilesAndDirs;
-        [Category("4. Copy Options")]
-        [Description("eXclude Lonely files and directories. (/XL).")]
-        [DisplayName("ExcludeLonelyFilesAndDirs")]
+        [Category("4. 复制选项")]
+        [Description("排除孤立的文件和目录。 (/XL)")]
+        [DisplayName("排除孤立的文件和目录")]
         [ChoPropertyInfo("excludeLonelyFilesAndDirs")]
         public bool ExcludeLonelyFilesAndDirs
         {
@@ -1081,9 +1081,9 @@
         }
 
         bool _fixFileSecurityOnFiles;
-        [Category("4. Copy Options")]
-        [Description("Fix file security on all files, even skipped files. (/SECFIX).")]
-        [DisplayName("FixFileSecurityOnFiles")]
+        [Category("4. 复制选项")]
+        [Description("修复所有文件的文件安全性，即使是跳过的文件。 (/SECFIX)")]
+        [DisplayName("修复文件安全性")]
         [ChoPropertyInfo("fixFileSecurityOnFiles")]
         public bool FixFileSecurityOnFiles
         {
@@ -1096,9 +1096,9 @@
         }
 
         bool _fallbackCopyFilesMode;
-        [Category("4. Copy Options")]
-        [Description("Use restartable mode; if access denied use Backup mode. (/ZB).")]
-        [DisplayName("FallbackCopyFilesMode")]
+        [Category("4. 复制选项")]
+        [Description("使用可重新启动模式；如果拒绝访问，请使用备份模式。 (/ZB)")]
+        [DisplayName("回退文件复制模式")]
         [ChoPropertyInfo("fallbackCopyFilesMode")]
         public bool FallbackCopyFilesMode
         {
@@ -1111,9 +1111,9 @@
         }
 
         uint _interPacketGapInMS;
-        [Category("4. Copy Options")]
-        [Description("Inter-Packet Gap (ms), to free bandwidth on slow lines. (/IPG:n).")]
-        [DisplayName("InterPacketGapInMS")]
+        [Category("4. 复制选项")]
+        [Description("程序包间的间距(ms)，以释放低速线路上的带宽。 (/IPG:n)")]
+        [DisplayName("包间距(ms)")]
         [ChoPropertyInfo("interPacketGapInMS")]
         public uint InterPacketGapInMS
         {
@@ -1126,9 +1126,9 @@
         }
 
         private uint _multithreadCopy;
-        [Category("4. Copy Options")]
-        [Description("Do multi-threaded copies with n threads (default 8). n must be at least 1 and not greater than 128. This option is incompatible with the /IPG and /EFSRAW options. Redirect output using /LOG option for better performance. (/MT[:n]).")]
-        [DisplayName("MultithreadCopy")]
+        [Category("4. 复制选项")]
+        [Description("使用 n 个线程进行多线程复制(默认值为 8)。n 必须至少为 1，但不得大于 128。该选项与 /IPG 和 /EFSRAW 选项不兼容。使用 /LOG 选项重定向输出以便获得最佳性能。 (/MT[:n])")]
+        [DisplayName("多线程复制")]
         [ChoPropertyInfo("multithreadCopy", DefaultValue = "0")]
         public uint MultithreadCopy
         {
@@ -1144,9 +1144,9 @@
         }
 
         bool _copyNODirInfo;
-        [Category("4. Copy Options")]
-        [Description("COPY NO directory info (by default /DCOPY:DA is done). (/NODCOPY).")]
-        [DisplayName("CopyNODirInfo")]
+        [Category("4. 复制选项")]
+        [Description("不复制任何目录信息(默认情况下，执行 /DCOPY:DA)。 (/NODCOPY)")]
+        [DisplayName("不复制目录信息")]
         [ChoPropertyInfo("copyNODirInfo")]
         public bool CopyNODirInfo
         {
@@ -1164,9 +1164,9 @@
         const string DefaultNoOfRetries = "1000000";
 
         uint _noOfRetries;
-        [Category("5. Monitoring Options")]
-        [Description("Number of Retries on failed copies: default 1 million. (/R:n).")]
-        [DisplayName("NoOfRetries")]
+        [Category("5. 重试选项")]
+        [Description("失败副本的重试次数: 默认为 1 百万。 (/R:n)")]
+        [DisplayName("重试次数")]
         [ChoPropertyInfo("noOfRetries", DefaultValue = DefaultNoOfRetries)]
         public uint NoOfRetries
         {
@@ -1181,9 +1181,9 @@
         const string DefaultWaitTimeBetweenRetries = "30";
 
         uint _waitTimeBetweenRetries;
-        [Category("5. Monitoring Options")]
-        [Description("Wait time between retries: default is 30 seconds. (/W:n).")]
-        [DisplayName("WaitTimeBetweenRetries")]
+        [Category("5. 重试选项")]
+        [Description("两次重试间的等待时间: 默认为 30 秒。 (/W:n)")]
+        [DisplayName("重试等待时间")]
         [ChoPropertyInfo("waitTimeBetweenRetries", DefaultValue = DefaultWaitTimeBetweenRetries)]
         public uint WaitTimeBetweenRetries
         {
@@ -1196,9 +1196,9 @@
         }
 
         bool _saveRetrySettingsToRegistry;
-        [Category("5. Monitoring Options")]
-        [Description("Save /R:n and /W:n in the Registry as default settings. (/REG).")]
-        [DisplayName("SaveRetrySettingsToRegistry")]
+        [Category("5. 重试选项")]
+        [Description("将 /R:n 和 /W:n 保存为注册表的默认设置。 (/REG)")]
+        [DisplayName("保存重试参数到注册表")]
         [ChoPropertyInfo("saveRetrySettingsToRegistry")]
         public bool SaveRetrySettingsToRegistry
         {
@@ -1211,9 +1211,9 @@
         }
 
         bool _waitForSharenames;
-        [Category("5. Monitoring Options")]
-        [Description("Wait for sharenames to be defined (retry error 67). (/TBD).")]
-        [DisplayName("WaitForSharenames")]
+        [Category("5. 重试选项")]
+        [Description("等待定义共享名称(重试错误 67)。 (/TBD)")]
+        [DisplayName("等待定义共享名称")]
         [ChoPropertyInfo("waitForSharenames")]
         public bool WaitForSharenames
         {
@@ -1226,9 +1226,9 @@
         }
 
         uint _runAgainWithNoChangesSeen;
-        [Category("5. Monitoring Options")]
-        [Description("Monitor source; run again when more than n changes seen. (/MON:n).")]
-        [DisplayName("RunAgainWithNoChangesSeen")]
+        [Category("5. 重试选项")]
+        [Description("监视源；发现多于 n 个更改时再次运行。 (/MON:n).")]
+        [DisplayName("多于 n 个更改时再次运行")]
         [ChoPropertyInfo("runAgainWithNoChangesSeen")]
         public uint RunAgainWithNoChangesSeen
         {
@@ -1241,9 +1241,9 @@
         }
 
         uint _runAgainWithChangesSeenInMin;
-        [Category("5. Monitoring Options")]
-        [Description("Monitor source; run again in m minutes time, if changed. (/MOT:m).")]
-        [DisplayName("RunAgainWithChangesSeenInMin")]
+        [Category("5. 重试选项")]
+        [Description("监视源；如果更改，在 m 分钟时间后再次运行。 (/MOT:m)")]
+        [DisplayName("如果更改，在 m 分钟时间后再次运行")]
         [ChoPropertyInfo("runAgainWithChangesSeenInMin")]
         public uint RunAgainWithChangesSeenInMin
         {
@@ -1256,9 +1256,9 @@
         }
 
         bool _checkRunHourPerFileBasis;
-        [Category("5. Monitoring Options")]
-        [Description("Check run hours on a Per File (not per pass) basis. (/PF).")]
-        [DisplayName("CheckRunHourPerFileBasis")]
+        [Category("5. 重试选项")]
+        [Description("基于每个文件(而不是每个步骤)来检查运行小时数。 (/PF)")]
+        [DisplayName("基于文件检查运行小时数")]
         [ChoPropertyInfo("checkRunHourPerFileBasis")]
         public bool CheckRunHourPerFileBasis
         {
@@ -1275,7 +1275,7 @@
         #region Instance Data Members (Scheduling Options)
 
         private TimeSpan _runHourStartTime;
-        [Category("6. Scheduling Options")]
+        [Category("6. 定时选项")]
         [Description("Run Hours StartTime, when new copies may be started after then. (/RH:hhmm-hhmm).")]
         [DisplayName("RunHourStartTime")]
         [ChoPropertyInfo("runHourStartTime")]
@@ -1294,7 +1294,7 @@
         }
 
         private TimeSpan _runHourEndTime;
-        [Category("6. Scheduling Options")]
+        [Category("6. 定时选项")]
         [Description("Run Hours EndTime, when new copies may be Ended before then. (/RH:hhmm-hhmm).")]
         [DisplayName("RunHourEndTime")]
         [ChoPropertyInfo("runHourEndTime")]
@@ -1318,9 +1318,9 @@
         #region Instance Data Members (Logging Options)
 
         private bool _noProgress;
-        [Category("7. Logging Options")]
-        [Description("No Progress - don't display percentage copied. Suppresses the display of progress information. This can be useful when output is redirected to a file. (/NP).")]
-        [DisplayName("NoProgress")]
+        [Category("7. 日志选项")]
+        [Description("无进度 - 不显示已复制的百分比。禁止显示进度信息。当输出重定向到文件时，这很有用。 (/NP)")]
+        [DisplayName("无进度")]
         [ChoPropertyInfo("noProgress")]
         public bool NoProgress
         {
@@ -1334,8 +1334,8 @@
         }
 
         private bool _unicode;
-        [Category("7. Logging Options")]
-        [Description("Display the status output as unicode text. (/unicode).")]
+        [Category("7. 日志选项")]
+        [Description("以 UNICODE 方式输出状态。 (/unicode)")]
         [DisplayName("Unicode")]
         [ChoPropertyInfo("unicode")]
         public bool Unicode
@@ -1345,9 +1345,9 @@
         }
 
         private string _outputLogFilePath;
-        [Category("7. Logging Options")]
-        [Description("Output status to LOG file (overwrite existing log). (/LOG:file).")]
-        [DisplayName("OutputLogFilePath")]
+        [Category("7. 日志选项")]
+        [Description("将状态输出到日志文件(覆盖现有日志)。 (/LOG:file)")]
+        [DisplayName("输出日志文件路径")]
         [ChoPropertyInfo("outputLogFilePath", DefaultValue = "")]
         public string OutputLogFilePath
         {
@@ -1356,9 +1356,9 @@
         }
 
         private string _unicodeOutputLogFilePath;
-        [Category("7. Logging Options")]
-        [Description("Output status to LOG file as UNICODE (overwrite existing log). (/UNILOG:file).")]
-        [DisplayName("UnicodeOutputLogFilePath")]
+        [Category("7. 日志选项")]
+        [Description("以 UNICODE 方式将状态输出到日志文件(覆盖现有日志)。 (/UNILOG:file)")]
+        [DisplayName("输出日志文件路径（Unicode）")]
         [ChoPropertyInfo("unicodeOutputLogFilePath", DefaultValue = "")]
         public string UnicodeOutputLogFilePath
         {
@@ -1367,9 +1367,9 @@
         }
 
         private string _appendOutputLogFilePath;
-        [Category("7. Logging Options")]
-        [Description("Output status to LOG file (append to existing log). (/LOG+:file).")]
-        [DisplayName("AppendOutputLogFilePath")]
+        [Category("7. 日志选项")]
+        [Description("将状态输出到日志文件(附加到现有日志中)。 (/LOG+:file)")]
+        [DisplayName("追加日志文件路径")]
         [ChoPropertyInfo("appendOutputLogFilePath", DefaultValue = "")]
         public string AppendOutputLogFilePath
         {
@@ -1378,9 +1378,9 @@
         }
 
         private string _appendUnicodeOutputLogFilePath;
-        [Category("7. Logging Options")]
-        [Description("Output status to LOG file as UNICODE (append to existing log). (/UNILOG+:file).")]
-        [DisplayName("AppendUnicodeOutputLogFilePath")]
+        [Category("7. 日志选项")]
+        [Description("以 UNICODE 方式将状态输出到日志文件(附加到现有日志中)。 (/UNILOG+:file)")]
+        [DisplayName("追加日志文件路径（Unicode）")]
         [ChoPropertyInfo("appendUnicodeOutputLogFilePath", DefaultValue = "")]
         public string AppendUnicodeOutputLogFilePath
         {
@@ -1389,9 +1389,9 @@
         }
 
         private bool _includeSourceFileTimestamp;
-        [Category("7. Logging Options")]
-        [Description("Include source file timestamps in the output. (/TS).")]
-        [DisplayName("IncludeSourceFileTimestamp")]
+        [Category("7. 日志选项")]
+        [Description("在输出中包含源文件的时间戳。 (/TS)")]
+        [DisplayName("包含源文件时间戳")]
         [ChoPropertyInfo("includeSourceFileTimestamp")]
         public bool IncludeSourceFileTimestamp
         {
@@ -1400,9 +1400,9 @@
         }
 
         private bool _includeFullPathName;
-        [Category("7. Logging Options")]
-        [Description("Include Full Pathname of files in the output. (/FP).")]
-        [DisplayName("IncludeFullPathName")]
+        [Category("7. 日志选项")]
+        [Description("在输出中包含文件的完整路径名称。 (/FP)")]
+        [DisplayName("包含完整路径名称")]
         [ChoPropertyInfo("includeFullPathName")]
         public bool IncludeFullPathName
         {
@@ -1411,9 +1411,9 @@
         }
 
         private bool _noFileSizeLog;
-        [Category("7. Logging Options")]
-        [Description("No Size - don't log file sizes. (/NS).")]
-        [DisplayName("NoFileSizeLog")]
+        [Category("7. 日志选项")]
+        [Description("无大小 - 不记录文件大小。 (/NS)")]
+        [DisplayName("不记录文件大小")]
         [ChoPropertyInfo("noFileSizeLog")]
         public bool NoFileSizeLog
         {
@@ -1422,9 +1422,9 @@
         }
 
         private bool _noFileClassLog;
-        [Category("7. Logging Options")]
-        [Description("No Class - don't log file classes. (/NC).")]
-        [DisplayName("NoFileClassLog")]
+        [Category("7. 日志选项")]
+        [Description("无类别 - 不记录文件类别。 (/NC)")]
+        [DisplayName("不记录文件类别")]
         [ChoPropertyInfo("noFileClassLog")]
         public bool NoFileClassLog
         {
@@ -1438,9 +1438,9 @@
         }
 
         private bool _noFileNameLog;
-        [Category("7. Logging Options")]
-        [Description("No File List - don't log file names. Hides file names. Failures are still logged though. Any files files deleted or would be deleted if /L was omitted are always logged. (/NFL).")]
-        [DisplayName("NoFileNameLog")]
+        [Category("7. 日志选项")]
+        [Description("无文件列表 - 不记录文件名。Hides file names. Failures are still logged though. Any files files deleted or would be deleted if /L was omitted are always logged. (/NFL)")]
+        [DisplayName("不记录文件名")]
         [ChoPropertyInfo("noFileNameLog")]
         public bool NoFileNameLog
         {
@@ -1449,9 +1449,9 @@
         }
 
         private bool _noDirListLog;
-        [Category("7. Logging Options")]
-        [Description("No Directory List - don't log directory names. Hides output of the directory listing. Full file pathnames are output to more easily track down problematic files. (/NDL).")]
-        [DisplayName("NoDirListLog")]
+        [Category("7. 日志选项")]
+        [Description("无目录列表 - 不记录目录名称。Hides output of the directory listing. Full file pathnames are output to more easily track down problematic files. (/NDL)")]
+        [DisplayName("不记录目录名称")]
         [ChoPropertyInfo("noDirListLog")]
         public bool NoDirListLog
         {
@@ -1464,7 +1464,7 @@
             }
         }
 
-        //[Category("Logging Options")]
+        //[Category("日志选项")]
         //[Description("Output to console window, as well as the log file. (/TEE).")]
         //[DisplayName("NoDirListLog")]
         //[ChoPropertyInfo("noDirListLog")]
@@ -1475,9 +1475,9 @@
         //}
 
         private bool _noJobHeader;
-        [Category("7. Logging Options")]
-        [Description("No Job Header. (/NJH).")]
-        [DisplayName("NoJobHeader")]
+        [Category("7. 日志选项")]
+        [Description("没有作业标头。 (/NJH)")]
+        [DisplayName("无作业标头")]
         [ChoPropertyInfo("noJobHeader")]
         public bool NoJobHeader
         {
@@ -1491,9 +1491,9 @@
         }
 
         private bool _noJobSummary;
-        [Category("7. Logging Options")]
-        [Description("No Job Summary. (/NJS).")]
-        [DisplayName("NoJobSummary")]
+        [Category("7. 日志选项")]
+        [Description("没有作业摘要。 (/NJS).")]
+        [DisplayName("无作业摘要")]
         [ChoPropertyInfo("noJobSummary")]
         public bool NoJobSummary
         {
@@ -1507,9 +1507,9 @@
         }
 
         private bool _printByteSizes;
-        [Category("7. Logging Options")]
-        [Description("Print sizes as bytes. (/BYTES).")]
-        [DisplayName("PrintByteSizes")]
+        [Category("7. 日志选项")]
+        [Description("以字节打印大小。 (/BYTES)")]
+        [DisplayName("打印字节大小")]
         [ChoPropertyInfo("printByteSizes")]
         public bool PrintByteSizes
         {
@@ -1523,9 +1523,9 @@
         }
 
         private bool _reportExtraFiles;
-        [Category("7. Logging Options")]
-        [Description("Report all eXtra files, not just those selected. (/X).")]
-        [DisplayName("ReportExtraFiles")]
+        [Category("7. 日志选项")]
+        [Description("报告所有多余的文件，而不只是选中的文件。 (/X)")]
+        [DisplayName("报告多余文件")]
         [ChoPropertyInfo("reportExtraFiles")]
         public bool ReportExtraFiles
         {
@@ -1534,9 +1534,9 @@
         }
 
         private bool _verboseOutput;
-        [Category("7. Logging Options")]
-        [Description("Produce Verbose output, showing skipped files. (/V).")]
-        [DisplayName("VerboseOutput")]
+        [Category("7. 日志选项")]
+        [Description("生成详细输出，同时显示跳过的文件。 (/V)")]
+        [DisplayName("详细输出")]
         [ChoPropertyInfo("verboseOutput")]
         public bool VerboseOutput
         {
@@ -1545,9 +1545,9 @@
         }
 
         private bool _showEstTimeOfArrival;
-        [Category("7. Logging Options")]
-        [Description("Show Estimated Time of Arrival of copied files. (/ETA).")]
-        [DisplayName("ShowEstTimeOfArrival")]
+        [Category("7. 日志选项")]
+        [Description("显示复制文件的预期到达时间。 (/ETA)")]
+        [DisplayName("显示预期到达时间")]
         [ChoPropertyInfo("showEstTimeOfArrival")]
         public bool ShowEstTimeOfArrival
         {
@@ -1556,9 +1556,9 @@
         }
 
         private bool _showDebugVolumeInfo;
-        [Category("7. Logging Options")]
-        [Description("Show debug volume information. (/DEBUG).")]
-        [DisplayName("ShowDebugVolumeInfo")]
+        [Category("7. 日志选项")]
+        [Description("显示调试卷信息。 (/DEBUG)")]
+        [DisplayName("显示调试卷信息")]
         [ChoPropertyInfo("showDebugVolumeInfo")]
         public bool ShowDebugVolumeInfo
         {

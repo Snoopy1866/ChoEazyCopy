@@ -138,34 +138,6 @@
 
         #region Instance Data Members (Others)
 
-        private bool _showRoboCopyProgress;
-        [Browsable(false)]
-        [ChoPropertyInfo("ShowRoboCopyProgress")]
-        [XmlIgnore]
-        public bool ShowRoboCopyProgress
-        {
-            get { return _showRoboCopyProgress; }
-            set
-            {
-                if (value)
-                {
-                    //CopySubDirectories = false;
-                    //CopyFlags = String.Empty;
-
-                    //MirrorDirTree = true; //MIR = Mirror mode
-                    NoProgress = true; //NP  = Don't show progress percentage in log
-                    NoDirListLog = true; // NDL - No directory list log
-                    NoFileClassLog = true; //NC  = Don't log file classes (existing, new file, etc.)
-                    PrintByteSizes = true; //BYTES = Show file sizes in bytes
-                    NoJobHeader = true; //NJH = Do not display robocopy job header (JH)
-                    NoJobSummary = true; //NJS = Do not display robocopy job summary (JS)
-                }
-
-                _showRoboCopyProgress = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         private bool _showOutputLineNumbers;
         [Browsable(false)]
         [ChoPropertyInfo("showOutputLineNumbers")]
@@ -243,7 +215,7 @@
         string _files;
         [Category("1. 通用选项")]
         [Description("要复制的文件（名称/通配符：默认为“*.*”）")]
-        [DisplayName("文件")]
+        [DisplayName("Files")]
         [ChoPropertyInfo("files", DefaultValue = "*.*")]
         public string Files
         {
@@ -275,7 +247,6 @@
         [Description("指定在 robocopy 操作之前运行的 MS-DOS 命令，以 ; 分隔（可选）")]
         [DisplayName("预处理命令")]
         [ChoPropertyInfo("precommands", DefaultValue = "")]
-        [Editor(typeof(ChoMultilineTextBoxEditor), typeof(ChoMultilineTextBoxEditor))]
         public string Precommands
         {
             get { return _precommands; }
@@ -291,7 +262,6 @@
         [Description("指定在 robocopy 操作之后运行的 MS-DOS 命令，以 ; 分隔（可选）")]
         [DisplayName("后处理命令")]
         [ChoPropertyInfo("postcommands", DefaultValue = "")]
-        [Editor(typeof(ChoMultilineTextBoxEditor), typeof(ChoMultilineTextBoxEditor))]
         public string Postcommands
         {
             get { return _postcommands; }
@@ -347,7 +317,6 @@
             set
             {
                 _copySubDirectories = value;
-                if (!value) ShowRoboCopyProgress = false;
                 NotifyPropertyChanged();
             }
         }
@@ -648,13 +617,6 @@
                 NotifyPropertyChanged();
             }
         }
-
-        internal void SetMoveFilesAndDirectories(string value)
-        {
-            _moveFilesAndDirectories = value;
-            NotifyPropertyChanged(nameof(Comments));
-        }
-
 
         bool _copySymbolicLinks;
         [Category("4. 复制选项")]
@@ -1164,7 +1126,7 @@
         const string DefaultNoOfRetries = "1000000";
 
         uint _noOfRetries;
-        [Category("5. 重试选项")]
+        [Category("5. 监视选项")]
         [Description("失败副本的重试次数: 默认为 1 百万。 (/R:n)")]
         [DisplayName("重试次数")]
         [ChoPropertyInfo("noOfRetries", DefaultValue = DefaultNoOfRetries)]
@@ -1181,7 +1143,7 @@
         const string DefaultWaitTimeBetweenRetries = "30";
 
         uint _waitTimeBetweenRetries;
-        [Category("5. 重试选项")]
+        [Category("5. 监视选项")]
         [Description("两次重试间的等待时间: 默认为 30 秒。 (/W:n)")]
         [DisplayName("重试等待时间")]
         [ChoPropertyInfo("waitTimeBetweenRetries", DefaultValue = DefaultWaitTimeBetweenRetries)]
@@ -1196,7 +1158,7 @@
         }
 
         bool _saveRetrySettingsToRegistry;
-        [Category("5. 重试选项")]
+        [Category("5. 监视选项")]
         [Description("将 /R:n 和 /W:n 保存为注册表的默认设置。 (/REG)")]
         [DisplayName("保存重试参数到注册表")]
         [ChoPropertyInfo("saveRetrySettingsToRegistry")]
@@ -1211,7 +1173,7 @@
         }
 
         bool _waitForSharenames;
-        [Category("5. 重试选项")]
+        [Category("5. 监视选项")]
         [Description("等待定义共享名称(重试错误 67)。 (/TBD)")]
         [DisplayName("等待定义共享名称")]
         [ChoPropertyInfo("waitForSharenames")]
@@ -1226,8 +1188,8 @@
         }
 
         uint _runAgainWithNoChangesSeen;
-        [Category("5. 重试选项")]
-        [Description("监视源；发现多于 n 个更改时再次运行。 (/MON:n).")]
+        [Category("5. 监视选项")]
+        [Description("监视源；发现多于 n 个更改时再次运行。 (/MON:n)")]
         [DisplayName("多于 n 个更改时再次运行")]
         [ChoPropertyInfo("runAgainWithNoChangesSeen")]
         public uint RunAgainWithNoChangesSeen
@@ -1241,7 +1203,7 @@
         }
 
         uint _runAgainWithChangesSeenInMin;
-        [Category("5. 重试选项")]
+        [Category("5. 监视选项")]
         [Description("监视源；如果更改，在 m 分钟时间后再次运行。 (/MOT:m)")]
         [DisplayName("如果更改，在 m 分钟时间后再次运行")]
         [ChoPropertyInfo("runAgainWithChangesSeenInMin")]
@@ -1256,7 +1218,7 @@
         }
 
         bool _checkRunHourPerFileBasis;
-        [Category("5. 重试选项")]
+        [Category("5. 监视选项")]
         [Description("基于每个文件(而不是每个步骤)来检查运行小时数。 (/PF)")]
         [DisplayName("基于文件检查运行小时数")]
         [ChoPropertyInfo("checkRunHourPerFileBasis")]
@@ -1325,12 +1287,7 @@
         public bool NoProgress
         {
             get { return _noProgress; }
-            set 
-            { 
-                _noProgress = value;
-                if (!value) ShowRoboCopyProgress = false;
-                NotifyPropertyChanged(); 
-            }
+            set { _noProgress = value; NotifyPropertyChanged(); }
         }
 
         private bool _unicode;
@@ -1429,17 +1386,12 @@
         public bool NoFileClassLog
         {
             get { return _noFileClassLog; }
-            set 
-            { 
-                _noFileClassLog = value;
-                if (!value) ShowRoboCopyProgress = false;
-                NotifyPropertyChanged(); 
-            }
+            set { _noFileClassLog = value; NotifyPropertyChanged(); }
         }
 
         private bool _noFileNameLog;
         [Category("7. 日志选项")]
-        [Description("无文件列表 - 不记录文件名。Hides file names. Failures are still logged though. Any files files deleted or would be deleted if /L was omitted are always logged. (/NFL)")]
+        [Description("无文件列表 - 不记录文件名。 隐藏文件名。尽管如此，处理失败的文件名仍然会被输出到日志中。 如果参数 /L 被省略，始终记录任何被删除或将要被删除的文件。 (/NFL).")]
         [DisplayName("不记录文件名")]
         [ChoPropertyInfo("noFileNameLog")]
         public bool NoFileNameLog
@@ -1450,23 +1402,18 @@
 
         private bool _noDirListLog;
         [Category("7. 日志选项")]
-        [Description("无目录列表 - 不记录目录名称。Hides output of the directory listing. Full file pathnames are output to more easily track down problematic files. (/NDL)")]
+        [Description("无目录列表 - 不记录目录名称。 隐藏输出的目录列表。输出完整的文件路径名称有助于追踪存在问题的文件。 (/NDL).")]
         [DisplayName("不记录目录名称")]
         [ChoPropertyInfo("noDirListLog")]
         public bool NoDirListLog
         {
             get { return _noDirListLog; }
-            set 
-            { 
-                _noDirListLog = value;
-                if (!value) ShowRoboCopyProgress = false;
-                NotifyPropertyChanged(); 
-            }
+            set { _noDirListLog = value; NotifyPropertyChanged(); }
         }
 
         //[Category("日志选项")]
-        //[Description("Output to console window, as well as the log file. (/TEE).")]
-        //[DisplayName("NoDirListLog")]
+        //[Description("输出到控制台窗口和日志文件。 (/TEE)")]
+        //[DisplayName("输出到控制台窗口和日志文件")]
         //[ChoPropertyInfo("noDirListLog")]
         //public bool NoDirListLog
         //{
@@ -1482,44 +1429,29 @@
         public bool NoJobHeader
         {
             get { return _noJobHeader; }
-            set 
-            { 
-                _noJobHeader = value;
-                if (!value) ShowRoboCopyProgress = false;
-                NotifyPropertyChanged(); 
-            }
+            set { _noJobHeader = value; NotifyPropertyChanged(); }
         }
 
         private bool _noJobSummary;
         [Category("7. 日志选项")]
-        [Description("没有作业摘要。 (/NJS).")]
+        [Description("没有作业摘要。 (/NJS)")]
         [DisplayName("无作业摘要")]
         [ChoPropertyInfo("noJobSummary")]
         public bool NoJobSummary
         {
             get { return _noJobSummary; }
-            set 
-            { 
-                _noJobSummary = value;
-                if (!value) ShowRoboCopyProgress = false;
-                NotifyPropertyChanged(); 
-            }
+            set { _noJobSummary = value; NotifyPropertyChanged(); }
         }
 
         private bool _printByteSizes;
         [Category("7. 日志选项")]
-        [Description("以字节打印大小。 (/BYTES)")]
+        [Description("打印字节大小。 (/BYTES)")]
         [DisplayName("打印字节大小")]
         [ChoPropertyInfo("printByteSizes")]
         public bool PrintByteSizes
         {
             get { return _printByteSizes; }
-            set 
-            { 
-                _printByteSizes = value;
-                if (!value) ShowRoboCopyProgress = false;
-                NotifyPropertyChanged(); 
-            }
+            set { _printByteSizes = value; NotifyPropertyChanged(); }
         }
 
         private bool _reportExtraFiles;
@@ -2067,7 +1999,7 @@
                     var value = (ChoFileMoveAttributes)Enum.Parse(typeof(ChoFileMoveAttributes), e.AddedItems.OfType<string>().FirstOrDefault());
                     if (value == ChoFileMoveAttributes.MoveFilesOnly)
                     {
-                        if (MessageBox.Show("Would like to delete the original file(s) after transferring the copies to the new location?", MainWindow.Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
+                        if (MessageBox.Show("在将副本转移到新位置后，是否要删除原始文件？", MainWindow.Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
                         {
                             e.Handled = true;
                             return;
@@ -2075,7 +2007,7 @@
                     }
                     else if (value == ChoFileMoveAttributes.MoveDirectoriesAndFiles)
                     {
-                        if (MessageBox.Show("Would like to delete the original file(s) / folder(s) after transferring the copies to the new location?", MainWindow.Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
+                        if (MessageBox.Show("在将副本转移到新位置后，是否要删除原始文件/文件夹？", MainWindow.Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
                         {
                             e.Handled = true;
                             return;
@@ -2084,22 +2016,6 @@
                 }
             }
             base.OnSelectionChanged(e);
-        }
-    }
-    public class ChoMultilineTextBoxEditor : Xceed.Wpf.Toolkit.PropertyGrid.Editors.ITypeEditor
-    {
-        public FrameworkElement ResolveEditor(Xceed.Wpf.Toolkit.PropertyGrid.PropertyItem propertyItem)
-        {
-            System.Windows.Controls.TextBox textBox = new System.Windows.Controls.TextBox();
-            textBox.AcceptsReturn = true;
-            //create the binding from the bound property item to the editor
-            var _binding = new Binding("Value"); //bind to the Value property of the PropertyItem
-            _binding.Source = propertyItem;
-            _binding.ValidatesOnExceptions = true;
-            _binding.ValidatesOnDataErrors = true;
-            _binding.Mode = propertyItem.IsReadOnly ? BindingMode.OneWay : BindingMode.TwoWay;
-            BindingOperations.SetBinding(textBox, System.Windows.Controls.TextBox.TextProperty, _binding);
-            return textBox;
         }
     }
 }

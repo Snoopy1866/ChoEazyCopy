@@ -122,24 +122,24 @@ namespace ChoEazyCopy.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DateCreatedVisibility {
+        public bool DateCreated {
             get {
-                return ((bool)(this["DateCreatedVisibility"]));
+                return ((bool)(this["DateCreated"]));
             }
             set {
-                this["DateCreatedVisibility"] = value;
+                this["DateCreated"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DateModifiedVisibility {
+        public bool DateModified {
             get {
-                return ((bool)(this["DateModifiedVisibility"]));
+                return ((bool)(this["DateModified"]));
             }
             set {
-                this["DateModifiedVisibility"] = value;
+                this["DateModified"] = value;
             }
         }
         
@@ -284,137 +284,6 @@ namespace ChoEazyCopy.Properties {
             }
             set {
                 this["WatchForChanges"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection RecentNumbersList {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["RecentNumbersList"]));
-            }
-            set {
-                this["RecentNumbersList"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("NaN")]
-        public double TaskQNameColumnWidth {
-            get {
-                return ((double)(this["TaskQNameColumnWidth"]));
-            }
-            set {
-                this["TaskQNameColumnWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("NaN")]
-        public double TaskQStartTimeColumnWidth {
-            get {
-                return ((double)(this["TaskQStartTimeColumnWidth"]));
-            }
-            set {
-                this["TaskQStartTimeColumnWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("NaN")]
-        public double TaskQQueueTimeColumnWidth {
-            get {
-                return ((double)(this["TaskQQueueTimeColumnWidth"]));
-            }
-            set {
-                this["TaskQQueueTimeColumnWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool TaskQueueTabActiveAtOpen {
-            get {
-                return ((bool)(this["TaskQueueTabActiveAtOpen"]));
-            }
-            set {
-                this["TaskQueueTabActiveAtOpen"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string TaskQTaskItems {
-            get {
-                return ((string)(this["TaskQTaskItems"]));
-            }
-            set {
-                this["TaskQTaskItems"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("NaN")]
-        public double TaskQEndTimeColumnWidth {
-            get {
-                return ((double)(this["TaskQEndTimeColumnWidth"]));
-            }
-            set {
-                this["TaskQEndTimeColumnWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("NaN")]
-        public double TaskQStatusColumnWidth {
-            get {
-                return ((double)(this["TaskQStatusColumnWidth"]));
-            }
-            set {
-                this["TaskQStatusColumnWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("NaN")]
-        public double TaskQErrorMsgColumnWidth {
-            get {
-                return ((double)(this["TaskQErrorMsgColumnWidth"]));
-            }
-            set {
-                this["TaskQErrorMsgColumnWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("NaN")]
-        public double TaskQIdColumnWidth {
-            get {
-                return ((double)(this["TaskQIdColumnWidth"]));
-            }
-            set {
-                this["TaskQIdColumnWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UpdateSettings {
-            get {
-                return ((bool)(this["UpdateSettings"]));
-            }
-            set {
-                this["UpdateSettings"] = value;
             }
         }
     }

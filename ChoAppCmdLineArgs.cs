@@ -83,7 +83,7 @@ namespace ChoEazyCopy
                 if (!SettingsFilePath.IsNullOrWhiteSpace())
                 {
                     if (!File.Exists(SettingsFilePath))
-                        throw new ArgumentException("Can't find '{0}' settings file.".FormatString(SettingsFilePath));
+                        throw new ArgumentException("找不到设置文件 '{0}' 。".FormatString(SettingsFilePath));
 
                     appSettings.LoadXml(File.ReadAllText(SettingsFilePath));
                 }
@@ -102,15 +102,16 @@ namespace ChoEazyCopy
                     ChoConsole.Write(e.Message, ConsoleColor.Yellow);
                 };
 
-                _roboCopyManager.Process(appSettings, true);
+                _roboCopyManager.Process(appSettings.RoboCopyFilePath, appSettings.GetCmdLineParams(), 
+                    appSettings, true);
             }
             catch (ThreadAbortException)
             {
-                Console.WriteLine("RoboCopy operation cancelled by user.");
+                Console.WriteLine("RoboCopy 处理被用户取消。");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("RoboCopy operation failed." + Environment.NewLine + ChoApplicationException.ToString(ex));
+                Console.WriteLine("RoboCopy 处理失败。" + Environment.NewLine + ChoApplicationException.ToString(ex));
             }
         }
     }

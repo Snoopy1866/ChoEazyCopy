@@ -27,14 +27,6 @@ namespace ChoEazyCopy
         [STAThread]
         public static void Main(string[] args)
         {
-            // Copy user settings from previous application version if necessary
-            if (Settings.Default.UpdateSettings)
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.Reload();
-                Settings.Default.UpdateSettings = false;
-                Settings.Default.Save();
-            }
             ChoApplication.Run(args);
         }
         public override void OnTrayAppExitMenuClicked(object sender, EventArgs e)

@@ -10,7 +10,6 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -30,8 +29,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
-using System.Xml;
-using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid;
 
 namespace ChoEazyCopy
@@ -46,7 +43,6 @@ namespace ChoEazyCopy
         #region Instance Members (Private)
 
         internal static string Caption;
-        private ChoObservableMruList<string> _recentNumbersList;
         private ChoRoboCopyManager _roboCopyManager = null;
         private DispatcherTimer _dispatcherTimer;
         private Thread _mainUIThread;
@@ -56,30 +52,6 @@ namespace ChoEazyCopy
         private ChoSortAdorner listViewSortAdorner = null;
         private bool IsStopping = false;
         private bool _isRunning = false;
-
-        private string _defaultAppStatusText = "就绪";
-        private string _appStatusText;
-        public string AppStatusText
-        {
-            get { return _appStatusText; }
-            set
-            {
-                _appStatusText = value;
-                RaisePropertyChanged(nameof(AppStatusText));
-            }
-        }
-
-        public ChoObservableMruList<string> RecentNumbersList
-        {
-            get
-            {
-                if (null == _recentNumbersList)
-                {
-                    _recentNumbersList = new ChoObservableMruList<string>(9, StringComparer.OrdinalIgnoreCase);
-                }
-                return _recentNumbersList;
-            }
-        }
         public bool IsRunning
         {
             get { return _isRunning; }
@@ -87,17 +59,6 @@ namespace ChoEazyCopy
             {
                 _isRunning = value;
                 RaisePropertyChanged(nameof(IsRunning));
-                RaisePropertyChanged(nameof(IsNotRunning));
-            }
-        }
-        public bool IsNotRunning
-        {
-            get { return !_isRunning; }
-            set
-            {
-                _isRunning = !value;
-                RaisePropertyChanged(nameof(IsRunning));
-                RaisePropertyChanged(nameof(IsNotRunning));
             }
         }
 
@@ -116,7 +77,7 @@ namespace ChoEazyCopy
 
         public object ControlBackgroundBrush
         {
-            get
+            get 
             {
                 return ChoAppTheme.ControlBackgroundBrush;
             }
@@ -170,25 +131,25 @@ namespace ChoEazyCopy
             }
         }
 
-        public bool DateCreatedVisibility
+        public bool DateCreated
         {
-            get { return Properties.Settings.Default.DateCreatedVisibility; }
+            get { return Properties.Settings.Default.DateCreated; }
             set
             {
-                Properties.Settings.Default.DateCreatedVisibility = value;
+                Properties.Settings.Default.DateCreated = value;
                 Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(DateCreatedVisibility));
+                RaisePropertyChanged(nameof(DateCreated));
             }
         }
 
-        public bool DateModifiedVisibility
+        public bool DateModified
         {
-            get { return Properties.Settings.Default.DateModifiedVisibility; }
+            get { return Properties.Settings.Default.DateModified; }
             set
             {
-                Properties.Settings.Default.DateModifiedVisibility = value;
+                Properties.Settings.Default.DateModified = value;
                 Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(DateModifiedVisibility));
+                RaisePropertyChanged(nameof(DateModified));
             }
         }
 
@@ -291,81 +252,7 @@ namespace ChoEazyCopy
                 RaisePropertyChanged(nameof(DateModifiedColumnWidth));
             }
         }
-        public double TaskQIdColumnWidth
-        {
-            get { return Properties.Settings.Default.TaskQIdColumnWidth; }
-            set
-            {
-                Properties.Settings.Default.TaskQIdColumnWidth = value;
-                Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(TaskQIdColumnWidth));
-            }
-        }
 
-        public double TaskQNameColumnWidth
-        {
-            get { return Properties.Settings.Default.TaskQNameColumnWidth; }
-            set
-            {
-                Properties.Settings.Default.TaskQNameColumnWidth = value;
-                Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(TaskQNameColumnWidth));
-            }
-        }
-
-        public double TaskQQueueTimeColumnWidth
-        {
-            get { return Properties.Settings.Default.TaskQQueueTimeColumnWidth; }
-            set
-            {
-                Properties.Settings.Default.TaskQQueueTimeColumnWidth = value;
-                Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(TaskQQueueTimeColumnWidth));
-            }
-        }
-
-        public double TaskQStartTimeColumnWidth
-        {
-            get { return Properties.Settings.Default.TaskQStartTimeColumnWidth; }
-            set
-            {
-                Properties.Settings.Default.TaskQStartTimeColumnWidth = value;
-                Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(TaskQStartTimeColumnWidth));
-            }
-        }
-
-        public double TaskQEndTimeColumnWidth
-        {
-            get { return Properties.Settings.Default.TaskQEndTimeColumnWidth; }
-            set
-            {
-                Properties.Settings.Default.TaskQEndTimeColumnWidth = value;
-                Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(TaskQEndTimeColumnWidth));
-            }
-        }
-
-        public double TaskQStatusColumnWidth
-        {
-            get { return Properties.Settings.Default.TaskQStatusColumnWidth; }
-            set
-            {
-                Properties.Settings.Default.TaskQStatusColumnWidth = value;
-                Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(TaskQStatusColumnWidth));
-            }
-        }
-        public double TaskQErrorMsgColumnWidth
-        {
-            get { return Properties.Settings.Default.TaskQErrorMsgColumnWidth; }
-            set
-            {
-                Properties.Settings.Default.TaskQErrorMsgColumnWidth = value;
-                Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(TaskQErrorMsgColumnWidth));
-            }
-        }
         public bool BackupTaskTabActiveAtOpen
         {
             get { return Properties.Settings.Default.BackupTaskTabActiveAtOpen; }
@@ -374,17 +261,6 @@ namespace ChoEazyCopy
                 Properties.Settings.Default.BackupTaskTabActiveAtOpen = value;
                 Properties.Settings.Default.Save();
                 RaisePropertyChanged(nameof(BackupTaskTabActiveAtOpen));
-            }
-        }
-
-        public bool TaskQueueTabActiveAtOpen
-        {
-            get { return Properties.Settings.Default.TaskQueueTabActiveAtOpen; }
-            set
-            {
-                Properties.Settings.Default.TaskQueueTabActiveAtOpen = value;
-                Properties.Settings.Default.Save();
-                RaisePropertyChanged(nameof(TaskQueueTabActiveAtOpen));
             }
         }
 
@@ -420,47 +296,6 @@ namespace ChoEazyCopy
                 RaisePropertyChanged(nameof(PropertyGridTooltip));
             }
         }
-        private bool _taskQStopTaskEnabled;
-        public bool TaskQStopTaskEnabled
-        {
-            get { return _taskQStopTaskEnabled; }
-            set
-            {
-                _taskQStopTaskEnabled = value;
-                RaisePropertyChanged(nameof(TaskQStopTaskEnabled));
-            }
-        }
-        private bool _taskQMoveUpTaskEnabled;
-        public bool TaskQMoveUpTaskEnabled
-        {
-            get { return _taskQMoveUpTaskEnabled; }
-            set
-            {
-                _taskQMoveUpTaskEnabled = value;
-                RaisePropertyChanged(nameof(TaskQMoveUpTaskEnabled));
-            }
-        }
-        private bool _taskQMoveDownTaskEnabled;
-        public bool TaskQMoveDownTaskEnabled
-        {
-            get { return _taskQMoveDownTaskEnabled; }
-            set
-            {
-                _taskQMoveDownTaskEnabled = value;
-                RaisePropertyChanged(nameof(TaskQMoveDownTaskEnabled));
-            }
-        }
-        private bool _taskQRemoveTaskEnabled;
-        public bool TaskQRemoveTaskEnabled
-        {
-            get { return _taskQRemoveTaskEnabled; }
-            set
-            {
-                _taskQRemoveTaskEnabled = value;
-                RaisePropertyChanged(nameof(TaskQRemoveTaskEnabled));
-            }
-        }
-
         private bool _cloneTaskEnabled;
         public bool CloneTaskEnabled
         {
@@ -479,36 +314,6 @@ namespace ChoEazyCopy
             {
                 _deleteTaskEnabled = value;
                 RaisePropertyChanged(nameof(DeleteTaskEnabled));
-            }
-        }
-        private bool _queueTaskEnabled;
-        public bool QueueTaskEnabled
-        {
-            get { return _queueTaskEnabled; }
-            set
-            {
-                _queueTaskEnabled = value;
-                RaisePropertyChanged(nameof(QueueTaskEnabled));
-            }
-        }
-        private bool _openTaskLogFileEnabled;
-        public bool OpenTaskLogFileEnabled
-        {
-            get { return _openTaskLogFileEnabled; }
-            set
-            {
-                _openTaskLogFileEnabled = value;
-                RaisePropertyChanged(nameof(OpenTaskLogFileEnabled));
-            }
-        }
-        private bool _openTaskLogFolderEnabled = true;
-        public bool OpenTaskLogFolderEnabled
-        {
-            get { return _openTaskLogFolderEnabled; }
-            set
-            {
-                _openTaskLogFolderEnabled = value;
-                RaisePropertyChanged(nameof(OpenTaskLogFolderEnabled));
             }
         }
 
@@ -569,45 +374,11 @@ namespace ChoEazyCopy
                             null
                         );
                     }
-                }
-                finally
+                }finally
                 {
                 }
             }
         }
-        private Guid _selectedTaskQueueItemId;
-        public Guid SelectedTaskQueueItemId
-        {
-            get { return _selectedTaskQueueItemId; }
-            set
-            {
-                _selectedTaskQueueItemId = value;
-                RaisePropertyChanged(nameof(SelectedTaskQueueItemId));
-            }
-        }
-        private ChoTaskQueueItem _selectedTaskQueueItem;
-        public ChoTaskQueueItem SelectedTaskQueueItem
-        {
-            get { return _selectedTaskQueueItem; }
-            set
-            {
-                _selectedTaskQueueItem = value;
-                RaisePropertyChanged(nameof(SelectedTaskQueueItem));
-            }
-        }
-        private readonly ChoTaskQManager _taskQManager = null;
-        private readonly object _taskQueueItemsLock = new object();
-        private ChoObservableCollection<ChoTaskQueueItem> _taskQueueItems = new ChoObservableCollection<ChoTaskQueueItem>();
-        public ChoObservableCollection<ChoTaskQueueItem> TaskQueueItems
-        {
-            get { return _taskQueueItems; }
-            set
-            {
-                _taskQueueItems = value;
-                RaisePropertyChanged(nameof(TaskQueueItems));
-            }
-        }
-
         private ObservableCollection<BackupTaskInfo> _backupTaskInfos = new ObservableCollection<BackupTaskInfo>();
         public ObservableCollection<BackupTaskInfo> BackupTaskInfos
         {
@@ -686,7 +457,7 @@ namespace ChoEazyCopy
             }
         }
 
-        private string _sourceDirTooltip = "Source directory.";
+        private string _sourceDirTooltip = "源目录";
         public string SourceDirTooltip
         {
             get { return _sourceDirTooltip; }
@@ -697,7 +468,7 @@ namespace ChoEazyCopy
             }
         }
 
-        private string _backupTaskDirTooltip = "Backup Tasks directory.";
+        private string _backupTaskDirTooltip = "备份任务目录";
         public string BackupTaskDirTooltip
         {
             get { return _backupTaskDirTooltip; }
@@ -744,39 +515,6 @@ namespace ChoEazyCopy
             }
         }
 
-        private bool _showRoboCopyProgress = false;
-        public bool ShowRoboCopyProgress
-        {
-            get { return _showRoboCopyProgress; }
-            set
-            {
-                _showRoboCopyProgress = value;
-                RaisePropertyChanged(nameof(ShowRoboCopyProgress));
-            }
-        }
-
-        private string _robocopyProgresssText = String.Empty;
-        public string RobocopyProgresssText
-        {
-            get { return _robocopyProgresssText; }
-            set
-            {
-                _robocopyProgresssText = value;
-                RaisePropertyChanged(nameof(RobocopyProgresssText));
-            }
-        }
-
-        private int _robocopyProgresssBarValue = 0;
-        public int RobocopyProgresssBarValue
-        {
-            get { return _robocopyProgresssBarValue; }
-            set
-            {
-                _robocopyProgresssBarValue = value;
-                RaisePropertyChanged(nameof(RobocopyProgresssBarValue));
-            }
-        }
-
         public MainWindow() :
             this(null)
         {
@@ -784,9 +522,6 @@ namespace ChoEazyCopy
 
         public MainWindow(string settingsFilePath)
         {
-            _taskQManager = new ChoTaskQManager(_taskQueueItems, _taskQueueItemsLock);
-            _taskQManager.Start();
-
             SettingsFilePath = settingsFilePath;
             InitializeComponent();
 
@@ -823,8 +558,6 @@ namespace ChoEazyCopy
 
         private void LoadWindow()
         {
-            AppStatusText = _defaultAppStatusText;
-
             _appSettings = new ChoAppSettings();
             if (!SettingsFilePath.IsNullOrWhiteSpace() && File.Exists(SettingsFilePath))
                 _appSettings.LoadXml(File.ReadAllText(SettingsFilePath));
@@ -860,9 +593,6 @@ namespace ChoEazyCopy
             //    this.Left = up.WindowLeft;
             //    this.WindowState = up.WindowState;
             //}
-            RestoreRecentNumbersList();
-            LoadTaskQTaskItems();
-            LoadTestTaskQueueItems();
 
             _backupTaskDirectory = up.BackupTaskDirectory;
             ReloadBackupTasks(SettingsFilePath);
@@ -877,31 +607,9 @@ namespace ChoEazyCopy
             grdDateModifiedColumn.Width = DateModifiedColumnWidth;
             ChoGridViewColumnVisibilityManager.SetGridColumnWidth(grdDateModifiedColumn);
 
-            grdTaskQTaskNameColumnHeader.Width = TaskQNameColumnWidth;
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(grdTaskQTaskNameColumnHeader);
-
-            grdTaskQQueueTimeColumnHeader.Width = TaskQQueueTimeColumnWidth;
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(grdTaskQQueueTimeColumnHeader);
-
-            grdTaskQStartTimeColumnHeader.Width = TaskQStartTimeColumnWidth;
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(grdTaskQStartTimeColumnHeader);
-
-            grdDateModifiedColumn.Width = DateModifiedColumnWidth;
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(grdDateModifiedColumn);
-
-            grdTaskQEndTimeColumnHeader.Width = TaskQEndTimeColumnWidth;
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(grdTaskQEndTimeColumnHeader);
-
-            grdTaskQStatusColumnHeader.Width = TaskQStatusColumnWidth;
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(grdTaskQStatusColumnHeader);
-
-            grdTaskQErrorMsgColumnHeader.Width = TaskQErrorMsgColumnWidth;
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(grdTaskQErrorMsgColumnHeader);
-
             tabBackupTasks.IsSelected = BackupTaskTabActiveAtOpen;
-            tabTaskQueue.IsSelected = TaskQueueTabActiveAtOpen;
             expControlPanel.IsExpanded = ControlPanelMinimized;
-
+            
             IsDirty = false;
 
             if (WatchForChanges)
@@ -933,18 +641,6 @@ namespace ChoEazyCopy
                 mnuRunatSystemsStartup.Visibility = Visibility.Collapsed;
             }
         }
-
-        private void LoadTestTaskQueueItems()
-        {
-#if TEST_MODE
-            _taskQManager.Add("Test1", status: TaskStatus.Completed);
-            _taskQManager.Add("Test2", status: TaskStatus.Stopped);
-            _taskQManager.Add("Test3", status: TaskStatus.Running);
-            _taskQManager.Add("Test4", status: TaskStatus.Queued);
-            _taskQManager.Add("Test5", status: TaskStatus.Queued);
-#endif
-        }
-
         private void SetTitle()
         {
             var settingsFileName = String.Empty; // SettingsFileName.IsNullOrWhiteSpace() ? String.Empty : $" - {SettingsFileName}";
@@ -971,20 +667,8 @@ namespace ChoEazyCopy
             RaisePropertyChanged(nameof(BackupTaskDirStatus));
         }
 
-        int _appStatusResetTimer = 0;
-
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            if (!AppStatusText.IsNullOrWhiteSpace() && AppStatusText != _defaultAppStatusText && !IsRunning)
-            {
-                _appStatusResetTimer += 30;
-                if (_appStatusResetTimer % (30 * 100) == 0)
-                {
-                    _appStatusResetTimer = 0;
-                    UpdateStatus(_defaultAppStatusText, null);
-                }
-            }
-
             if (_msgBuffer.Length > 0)
             {
                 lock (_msgBufferLock)
@@ -1051,31 +735,16 @@ namespace ChoEazyCopy
                 BackupTaskDirStatus = false;
             }
 
-            var index = -1;
-            var size = 0;
-            var selectedTaskQueueItem = SelectedTaskQueueItem;
-            lock (_taskQueueItemsLock)
-            {
-                size = TaskQueueItems.Count;
-                index = selectedTaskQueueItem != null ? TaskQueueItems.IndexOf(SelectedTaskQueueItem) : -1;
-            }
-
-            QueueTaskEnabled = DeleteTaskEnabled = CloneTaskEnabled = !SelectedBackupTaskFilePath.IsNullOrWhiteSpace();
-            TaskQStopTaskEnabled = selectedTaskQueueItem != null && selectedTaskQueueItem.Status == TaskStatus.Running;
-            TaskQMoveUpTaskEnabled = selectedTaskQueueItem != null && selectedTaskQueueItem.Status == TaskStatus.Queued && index > 0;
-            TaskQMoveDownTaskEnabled = selectedTaskQueueItem != null && selectedTaskQueueItem.Status == TaskStatus.Queued && index < size - 1;
-            TaskQRemoveTaskEnabled = selectedTaskQueueItem != null && selectedTaskQueueItem.Status != TaskStatus.Running;
-            OpenTaskLogFileEnabled = selectedTaskQueueItem != null && File.Exists(selectedTaskQueueItem.LogFilePath) ? true : false;
+            DeleteTaskEnabled = CloneTaskEnabled = !SelectedBackupTaskFilePath.IsNullOrWhiteSpace();
 
             //tabControlPanel.IsEnabled = !IsRunning;
-            dpRoboCopyProgress.IsEnabled = !IsRunning;
             grpBackupTasks.IsEnabled = !IsRunning;
             pgAppSettings.Visibility = IsRunning ? Visibility.Collapsed : Visibility.Visible;
             txtPropertyGridWaterMark.Visibility = !IsRunning ? Visibility.Collapsed : Visibility.Visible;
             if (IsRunning)
             {
                 //BakAppSettings = null;
-                PropertyGridTooltip = "任务运行时将隐藏控制面板";
+                PropertyGridTooltip = "任务运行过程中隐藏控制面板";
             }
             else
             {
@@ -1107,7 +776,7 @@ namespace ChoEazyCopy
         {
             ChoFolderBrowserDialog dlg1 = new ChoFolderBrowserDialog
             {
-                Description = "选择源文件夹...",
+                Description = "选择源目录...",
                 ShowNewFolderButton = true,
                 ShowEditBox = true,
                 ShowBothFilesAndFolders = false,
@@ -1132,7 +801,7 @@ namespace ChoEazyCopy
         {
             ChoFolderBrowserDialog dlg1 = new ChoFolderBrowserDialog
             {
-                Description = "选择复制/移动到的目标文件夹...",
+                Description = "选择复制/移动文件夹到...",
                 ShowNewFolderButton = true,
                 ShowEditBox = true,
                 ShowBothFilesAndFolders = false,
@@ -1166,9 +835,6 @@ namespace ChoEazyCopy
 
             try
             {
-                RobocopyProgresssBarValue = 0;
-                RobocopyProgresssText = "Analyzing RoboCopy operation...";
-
                 IsRunning = true;
 #if _DELAY_RUN_
                 Thread.Sleep(10 * 1000);
@@ -1176,13 +842,8 @@ namespace ChoEazyCopy
                 _roboCopyManager = new ChoRoboCopyManager();
                 _roboCopyManager.Status += (sender, e) => SetStatusMsg(e.Message);
                 _roboCopyManager.AppStatus += (sender, e) => UpdateStatus(e.Message, e.Tag.ToNString());
-                _roboCopyManager.Progress += (sender, e) =>
-                {
-                    RobocopyProgresssBarValue = (int)(((double)e._runningBytes / e._totalBytes) * 100);
-                    RobocopyProgresssText = $"已复制 {e._runningFileCount:N0} / {e._totalFileCount:N0} 个文件; 已复制 {FileSizeFormatter.FormatSize(e._runningBytes)} / {FileSizeFormatter.FormatSize(e._totalBytes)}";
-                };
 
-                _roboCopyManager.Process(appSettings);
+                _roboCopyManager.Process(appSettings.RoboCopyFilePath, appSettings.GetCmdLineParams(), appSettings);
             }
             catch (ThreadAbortException)
             {
@@ -1196,8 +857,6 @@ namespace ChoEazyCopy
             {
                 IsRunning = false;
                 _roboCopyManager = null;
-                if (RobocopyProgresssText == "Analyzing Robocopy operation...")
-                    RobocopyProgresssText = String.Empty;
             }
         }
 
@@ -1238,7 +897,7 @@ namespace ChoEazyCopy
         {
             sbAppStatus.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                AppStatusText = text;
+                sbAppStatus.Text = text;
                 if (!toolTipText.IsNullOrWhiteSpace())
                     ShowBalloonTipText(toolTipText);
             }));
@@ -1361,8 +1020,6 @@ namespace ChoEazyCopy
 
         private bool SaveSettings(bool newFile)
         {
-            DisposeBackupTasksDirectoryWatcher();
-
             if (newFile || SettingsFilePath.IsNullOrWhiteSpace())
             {
                 SaveFileDialog dlg = new SaveFileDialog();
@@ -1387,12 +1044,8 @@ namespace ChoEazyCopy
             }
             catch (Exception ex)
             {
-                MessageBox.Show("将设置保存到文件失败。{0}".FormatString(ex.Message), Caption, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("将设置保存到文件失败。 {0}".FormatString(ex.Message), Caption, MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
-            }
-            finally
-            {
-                WatchBackupTasksDirectory();
             }
         }
 
@@ -1436,88 +1089,6 @@ namespace ChoEazyCopy
             NewSettingsFile();
         }
 
-        private void btnNewSyncFile_Click(object sender, RoutedEventArgs e)
-        {
-            if (SaveSettings())
-                return;
-
-            using (var x = new ChoWPFWaitCursor())
-            {
-                SettingsFilePath = null;
-                txtSourceDirectory.Text = String.Empty;
-                txtDestDirectory.Text = String.Empty;
-                txtStatus.Text = String.Empty;
-                _appSettings.Reset();
-                _appSettings.CopyFlags = String.Empty;
-                _appSettings.CopySubDirectories = false;
-
-                _appSettings.MirrorDirTree = true;
-                _appSettings.CopyFilesWithFileInfo = true;
-
-                _appSettings.FallbackCopyFilesMode = true;
-                _appSettings.WaitTimeBetweenRetries = 1;
-                _appSettings.NoOfRetries = 2;
-                IsDirty = false;
-                SelectedBackupTaskItem = null;
-            }
-        }
-
-        private void btnNewCopyFile_Click(object sender, RoutedEventArgs e)
-        {
-            if (SaveSettings())
-                return;
-
-            using (var x = new ChoWPFWaitCursor())
-            {
-                SettingsFilePath = null;
-                txtSourceDirectory.Text = String.Empty;
-                txtDestDirectory.Text = String.Empty;
-                txtStatus.Text = String.Empty;
-                _appSettings.Reset();
-
-                _appSettings.CopyFlags = String.Empty;
-                _appSettings.CopySubDirectories = false;
-
-                _appSettings.MirrorDirTree = true;
-                _appSettings.CopyFilesWithFileInfo = true;
-
-                _appSettings.ExcludeExtraFilesAndDirs = true;
-                _appSettings.FallbackCopyFilesMode = true;
-                _appSettings.WaitTimeBetweenRetries = 1;
-                _appSettings.NoOfRetries = 2;
-
-                IsDirty = false;
-                SelectedBackupTaskItem = null;
-            }
-        }
-
-        private void btnNewMoveFile_Click(object sender, RoutedEventArgs e)
-        {
-            if (SaveSettings())
-                return;
-
-            using (var x = new ChoWPFWaitCursor())
-            {
-                SettingsFilePath = null;
-                txtSourceDirectory.Text = String.Empty;
-                txtDestDirectory.Text = String.Empty;
-                txtStatus.Text = String.Empty;
-                _appSettings.Reset();
-
-                _appSettings.CopyFlags = String.Empty;
-                _appSettings.CopySubDirectories = false;
-
-                _appSettings.SetMoveFilesAndDirectories(ChoFileMoveAttributes.MoveDirectoriesAndFiles.ToString());
-
-                _appSettings.FallbackCopyFilesMode = true;
-                _appSettings.WaitTimeBetweenRetries = 1;
-                _appSettings.NoOfRetries = 2;
-
-                IsDirty = false;
-                SelectedBackupTaskItem = null;
-            }
-        }
-
         private void NewSettingsFile(bool reset = true)
         {
             using (var x = new ChoWPFWaitCursor())
@@ -1547,20 +1118,8 @@ namespace ChoEazyCopy
             //_wndClosing = true;
             if (IsRunning)
             {
-                if (MessageBox.Show("文件处理正在进行中。您确定要关闭应用程序吗？", Caption, MessageBoxButton.YesNo,
-                    MessageBoxImage.Stop) == MessageBoxResult.No)
-                {
-                    e.Cancel = true;
+                if (MessageBox.Show("文件处理正在进行中。您确定要关闭应用程序吗？", Caption, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     return;
-                }
-            }
-            else
-            {
-                if (MessageBox.Show("您确定要关闭应用程序吗？", Caption, MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.No)
-                {
-                    e.Cancel = true;
-                    return;
-                }
             }
 
             e.Cancel = SaveSettings();
@@ -1570,7 +1129,6 @@ namespace ChoEazyCopy
                 try
                 {
                     BackupTaskTabActiveAtOpen = tabBackupTasks.IsSelected;
-                    TaskQueueTabActiveAtOpen = tabTaskQueue.IsSelected;
                     ControlPanelMinimized = expControlPanel.IsExpanded;
 
                     var up = new ChoUserPreferences();
@@ -1587,13 +1145,10 @@ namespace ChoEazyCopy
                     up.BackupTaskDirectory = BackupTaskDirectory;
                     up.Save();
 
-                    SaveRecentNumbersList();
-                    SaveTaskQTaskItems();
                 }
                 catch { }
-
-                ChoApplication.NotifyIcon.Dispose();
             }
+            ChoApplication.NotifyIcon.Dispose();
         }
 
         private void RibbonWin_Loaded(object sender, RoutedEventArgs e)
@@ -1608,14 +1163,14 @@ namespace ChoEazyCopy
 
         private void BtnDonate_Click(object sender, RoutedEventArgs e)
         {
-            string url = "https://buy.stripe.com/8wMdSt5KogJGf969AE"; // "https://www.paypal.com/donate/?hosted_button_id=HB6J7QG73HMK8";
-                                                                      //        string url = "https://www.paypal.com/cgi-bin/webscr" +
-                                                                      //"?cmd=" + "_donations" +
-                                                                      //"&business=" + "cinchoofrx@gmail.com" +
-                                                                      //"&lc=" + "US" +
-                                                                      //"&item_name=" + "ChoEazyCopy Donation" +
-                                                                      //"&currency_code=" + "USD" +
-                                                                      //"&bn=" + "PP%2dDonationsBF";
+            string url = "https://www.paypal.com/donate/?hosted_button_id=HB6J7QG73HMK8";
+    //        string url = "https://www.paypal.com/cgi-bin/webscr" +
+    //"?cmd=" + "_donations" +
+    //"&business=" + "cinchoofrx@gmail.com" +
+    //"&lc=" + "US" +
+    //"&item_name=" + "ChoEazyCopy Donation" +
+    //"&currency_code=" + "USD" +
+    //"&bn=" + "PP%2dDonationsBF";
 
             System.Diagnostics.Process.Start(url);
         }
@@ -1681,15 +1236,6 @@ namespace ChoEazyCopy
         }
 
         private FileSystemWatcher _watcher;
-
-        private void DisposeBackupTasksDirectoryWatcher()
-        {
-            if (_watcher != null)
-                _watcher.Dispose();
-
-            _watcher = null;
-        }
-
         private void WatchBackupTasksDirectory()
         {
             if (_watcher != null)
@@ -1760,19 +1306,19 @@ namespace ChoEazyCopy
                             {
                                 BackupTaskInfos.Add(fi);
                             }
-                            //if (selectedBackupTaskInfo.IsNullOrWhiteSpace()
-                            //    || !BackupTaskInfos.Select(f => f.FilePath == selectedBackupTaskInfo).Any())
-                            //{
-                            //    var fi = BackupTaskInfos.FirstOrDefault();
-                            //    selectedBackupTaskInfo = fi != null ? fi.FilePath : null;
-                            //}
-                            if (!settingsFilePath.IsNullOrWhiteSpace() &&
-                                    BackupTaskInfos.Where(f => f.FilePath == settingsFilePath).Any())
+                        //if (selectedBackupTaskInfo.IsNullOrWhiteSpace()
+                        //    || !BackupTaskInfos.Select(f => f.FilePath == selectedBackupTaskInfo).Any())
+                        //{
+                        //    var fi = BackupTaskInfos.FirstOrDefault();
+                        //    selectedBackupTaskInfo = fi != null ? fi.FilePath : null;
+                        //}
+                        if (!settingsFilePath.IsNullOrWhiteSpace() &&
+                                BackupTaskInfos.Where(f => f.FilePath == settingsFilePath).Any())
                             {
                                 SelectedBackupTaskFilePath = BackupTaskInfos.Where(f => f.FilePath == settingsFilePath).First().FilePath;
                             }
-                            //WatchBackupTasksDirectory();
-                        }
+                        //WatchBackupTasksDirectory();
+                    }
                         finally
                         {
                             _isBackupTasksLoading = false;
@@ -1797,23 +1343,7 @@ namespace ChoEazyCopy
                 DeleteTask();
         }
 
-        private void mnuQueueTask_Click(object sender, RoutedEventArgs e)
-        {
-            QueueTask();
-        }
-
-        private void QueueTask()
-        {
-            if (SelectedBackupTaskItem == null)
-                return;
-
-            _taskQManager.Add(SelectedBackupTaskItem.TaskName, taskFilePath: SelectedBackupTaskFilePath,
-                onSuccess: t => UpdateStatus($"`{t.TaskName}` 任务排队成功。", null),
-                onFailure: (t, e) => UpdateStatus($"`{t}` 任务排队失败。", null)
-                );
-        }
-
-        private void lstBackupTasks_PreviewKeyUp(object sender, KeyEventArgs e)
+        private void mnuDeleteTask_PreviewKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Delete)
             {
@@ -1824,11 +1354,6 @@ namespace ChoEazyCopy
             {
                 if (SelectedBackupTaskItem != null)
                     CloneTask();
-            }
-            else if (e.Key == Key.Q && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                if (SelectedBackupTaskItem != null)
-                    QueueTask();
             }
         }
 
@@ -1871,11 +1396,6 @@ namespace ChoEazyCopy
                     }
                 }
             }
-        }
-
-        private void btnQueueTask_Click(object sender, RoutedEventArgs e)
-        {
-            QueueTask();
         }
 
         private string GetNextCloneTaskFileName(string taskFilePath)
@@ -1927,6 +1447,7 @@ namespace ChoEazyCopy
                 }
             }
         }
+
         private void TaskNameGridViewColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (e.NewSize.Width <= 60)
@@ -1966,36 +1487,20 @@ namespace ChoEazyCopy
             DateModifiedColumnWidth = ((GridViewColumnHeader)sender).Column.Width;
         }
 
-        private void mnuTaskQColumnToFit_Click(object sender, RoutedEventArgs e)
-        {
-            var header = _selectedTaskQGridViewColumnHeader;
-            if (header == null)
-                return;
-
-            header.Column.Width = 0;
-            header.Column.Width = Double.NaN;
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(header);
-        }
-
         private void mnuColumnToFit_Click(object sender, RoutedEventArgs e)
         {
-            var header = _selectedGridViewColumnHeader;
-            if (header == null)
+            var selectedGridViewColumnHeader = _selectedGridViewColumnHeader;
+            if (selectedGridViewColumnHeader == null)
                 return;
 
-            header.Column.Width = 0;
-            header.Column.Width = Double.NaN;
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(header);
+            selectedGridViewColumnHeader.Column.Width = 0;
+            selectedGridViewColumnHeader.Column.Width = Double.NaN;
+            ChoGridViewColumnVisibilityManager.SetGridColumnWidth(selectedGridViewColumnHeader);
         }
 
         private void mnuAllColumnsToFit_Click(object sender, RoutedEventArgs e)
         {
-            ChoGridViewColumnVisibilityManager.ResizeAllColumnsToFit(lstBackupTasks);
-        }
-
-        private void mnuTaskQAllColumnsToFit_Click(object sender, RoutedEventArgs e)
-        {
-            ChoGridViewColumnVisibilityManager.ResizeAllColumnsToFit(lstTaskQueue);
+            ChoGridViewColumnVisibilityManager.ResizeAllColumnsToFit();
         }
 
         private GridViewColumnHeader _selectedGridViewColumnHeader;
@@ -2011,25 +1516,19 @@ namespace ChoEazyCopy
             }
         }
 
-        private GridViewColumnHeader _selectedTaskQGridViewColumnHeader;
-        private void GridViewTaskQColumnHeader_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.RightButton == MouseButtonState.Pressed)
-            {
-                _selectedTaskQGridViewColumnHeader = sender as GridViewColumnHeader;
-            }
-            else
-            {
-                _selectedTaskQGridViewColumnHeader = null;
-            }
-        }
-
-        private void grdTaskQColumnHeader_Click(object sender, RoutedEventArgs e)
+        private void grdTaskNameColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
-            SortTaskQColumn(column);
+            SortColumn(column);
         }
-        private void grdBackupTaskColumnHeader_Click(object sender, RoutedEventArgs e)
+
+        private void grddDateCreatedColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+            SortColumn(column);
+        }
+
+        private void grddDateModifiedColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
             SortColumn(column);
@@ -2052,25 +1551,6 @@ namespace ChoEazyCopy
             listViewSortAdorner = new ChoSortAdorner(listViewSortCol, newDir);
             AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
             lstBackupTasks.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
-        }
-
-        private void SortTaskQColumn(GridViewColumnHeader column)
-        {
-            string sortBy = column.Tag.ToString();
-            if (listViewSortCol != null)
-            {
-                AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
-                lstTaskQueue.Items.SortDescriptions.Clear();
-            }
-
-            ListSortDirection newDir = ListSortDirection.Ascending;
-            if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
-                newDir = ListSortDirection.Descending;
-
-            listViewSortCol = column;
-            listViewSortAdorner = new ChoSortAdorner(listViewSortCol, newDir);
-            AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
-            lstTaskQueue.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
         private void mnuResetExpander_Click(object sender, RoutedEventArgs e)
@@ -2175,326 +1655,6 @@ namespace ChoEazyCopy
             if (value != null)
                 value = value.Replace("\"", String.Empty);
             return value == appLocation;
-        }
-        private void RestoreRecentNumbersList()
-        {
-            if (null == Properties.Settings.Default.RecentNumbersList)
-            {
-                Properties.Settings.Default.RecentNumbersList = new StringCollection();
-            }
-
-            StringCollection userNumbers = Properties.Settings.Default.RecentNumbersList;
-            foreach (string recentNumber in userNumbers)
-            {
-                if (!recentNumber.IsNullOrWhiteSpace() && Directory.Exists(recentNumber))
-                    RecentNumbersList.Add(recentNumber);
-            }
-        }
-        private void SaveRecentNumbersList()
-        {
-            if (null == Properties.Settings.Default.RecentNumbersList)
-            {
-                Properties.Settings.Default.RecentNumbersList = new StringCollection();
-            }
-
-            Properties.Settings.Default.RecentNumbersList.Clear();
-            Properties.Settings.Default.RecentNumbersList.AddRange(RecentNumbersList.ToArray<string>());
-
-            Properties.Settings.Default.Save();
-        }
-        private void LoadTaskQTaskItems()
-        {
-#if !TEST_MODE
-            lock (_taskQueueItemsLock)
-            {
-                try
-                {
-                    var xmlSerializer = new XmlSerializer(typeof(ChoTaskQueueItem[]));
-                    var xml = Properties.Settings.Default.TaskQTaskItems;
-
-                    var objs = (ChoTaskQueueItem[])xmlSerializer.Deserialize(new StringReader(xml));
-                    _taskQueueItems.Clear();
-                    foreach (var obj in objs)
-                    {
-                        if (obj.Status == TaskStatus.Running)
-                        {
-                            obj.Status = TaskStatus.Stopped;
-                            obj.EndTime = DateTime.Now;
-                            obj.ErrorMessage = "Operation terminated by application shutdown.";
-                        }
-
-                        _taskQueueItems.Add(obj);
-                    }
-                }
-                catch { }
-            }
-#endif
-        }
-        private void SaveTaskQTaskItems()
-        {
-            lock (_taskQueueItemsLock)
-            {
-                try
-                {
-                    XmlSerializer xsSubmit = new XmlSerializer(typeof(ChoTaskQueueItem[]));
-                    var xml = "";
-
-                    using (var sww = new StringWriter())
-                    {
-                        using (XmlWriter writer = XmlWriter.Create(sww))
-                        {
-                            xsSubmit.Serialize(writer, _taskQueueItems.ToArray());
-                            xml = sww.ToString();
-                        }
-                    }
-                    Properties.Settings.Default.TaskQTaskItems = xml;
-
-                    Properties.Settings.Default.Save();
-                }
-                catch { }
-            }
-        }
-
-        private void lstTaskQueue_PreviewKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Delete)
-            {
-                TaskQRemoveTask();
-            }
-            else if (e.Key == Key.Up && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                TaskQMoveUpTask();
-            }
-            else if (e.Key == Key.Down && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                TaskQMoveDownTask();
-            }
-            else if (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                TaskQStopTask();
-            }
-            else if (e.Key == Key.O && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                OpenTaskLogFile();
-            }
-        }
-
-        private void btnTaskQStopTask_Click(object sender, RoutedEventArgs e)
-        {
-            TaskQStopTask();
-        }
-        private void TaskQStopTask()
-        {
-            if (_selectedTaskQueueItem == null)
-                return;
-
-        }
-        private void btnTaskQMoveUpTask_Click(object sender, RoutedEventArgs e)
-        {
-            TaskQMoveUpTask();
-        }
-        private void TaskQMoveUpTask()
-        {
-            return;
-            if (_selectedTaskQueueItem == null)
-                return;
-
-            lock (_taskQueueItemsLock)
-            {
-                if (_selectedTaskQueueItem == null)
-                    return;
-
-                var index = TaskQueueItems.IndexOf(_selectedTaskQueueItem);
-                TaskQueueItems.Move(index + 1, index);
-            }
-        }
-
-        private void btnTaskQMoveDownTask_Click(object sender, RoutedEventArgs e)
-        {
-            TaskQMoveDownTask();
-        }
-        private void TaskQMoveDownTask()
-        {
-            return;
-            if (_selectedTaskQueueItem == null)
-                return;
-
-            lock (_taskQueueItemsLock)
-            {
-                if (_selectedTaskQueueItem == null)
-                    return;
-
-                var index = TaskQueueItems.IndexOf(_selectedTaskQueueItem);
-                TaskQueueItems.Move(index - 1, index);
-            }
-        }
-
-        private void btnTaskQRemoveTask_Click(object sender, RoutedEventArgs e)
-        {
-            TaskQRemoveTask();
-        }
-
-        private void TaskQRemoveTask()
-        {
-            lock (_taskQueueItemsLock)
-            {
-                if (_selectedTaskQueueItem != null)
-                {
-                    MessageBoxResult result = MessageBoxResult.Yes;
-                    if (ConfirmOnDelete)
-                    {
-                        result = MessageBox.Show($"您确定要删除 `{Path.GetFileName(_selectedTaskQueueItem.TaskName)}` 任务？",
-                            Caption, MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    }
-
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        try
-                        {
-                            _taskQueueItems.Remove(_selectedTaskQueueItem);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"删除 `{Path.GetFileName(_selectedTaskQueueItem.TaskName)}` 任务失败。 {ex.Message}",
-                                Caption, MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void grdTaskQIdColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (e.NewSize.Width <= 60)
-            {
-                e.Handled = true;
-                ((GridViewColumnHeader)sender).Column.Width = 60;
-            }
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth((GridViewColumnHeader)sender);
-            TaskQIdColumnWidth = ((GridViewColumnHeader)sender).Column.Width;
-        }
-
-        private void grdTaskQNameColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (e.NewSize.Width <= 60)
-            {
-                e.Handled = true;
-                ((GridViewColumnHeader)sender).Column.Width = 60;
-            }
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth((GridViewColumnHeader)sender);
-            TaskQNameColumnWidth = ((GridViewColumnHeader)sender).Column.Width;
-        }
-
-        private void grdTaskQQueueTimeColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!ChoGridViewColumnVisibilityManager.GetIsVisible(((GridViewColumnHeader)sender).Column))
-                return;
-
-            if (e.NewSize.Width <= 60)
-            {
-                e.Handled = true;
-                ((GridViewColumnHeader)sender).Column.Width = 0;
-                ((GridViewColumnHeader)sender).Column.Width = 60;
-            }
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth((GridViewColumnHeader)sender);
-            TaskQQueueTimeColumnWidth = ((GridViewColumnHeader)sender).Column.Width;
-        }
-
-        private void grdTaskQStartTimeColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!ChoGridViewColumnVisibilityManager.GetIsVisible(((GridViewColumnHeader)sender).Column))
-                return;
-
-            if (e.NewSize.Width <= 60)
-            {
-                e.Handled = true;
-                ((GridViewColumnHeader)sender).Column.Width = 0;
-                ((GridViewColumnHeader)sender).Column.Width = 60;
-            }
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth((GridViewColumnHeader)sender);
-            TaskQStartTimeColumnWidth = ((GridViewColumnHeader)sender).Column.Width;
-        }
-
-        private void grdTaskQEndTimeColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!ChoGridViewColumnVisibilityManager.GetIsVisible(((GridViewColumnHeader)sender).Column))
-                return;
-
-            if (e.NewSize.Width <= 60)
-            {
-                e.Handled = true;
-                ((GridViewColumnHeader)sender).Column.Width = 0;
-                ((GridViewColumnHeader)sender).Column.Width = 60;
-            }
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth((GridViewColumnHeader)sender);
-            TaskQEndTimeColumnWidth = ((GridViewColumnHeader)sender).Column.Width;
-        }
-
-        private void grdTaskQStatusColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!ChoGridViewColumnVisibilityManager.GetIsVisible(((GridViewColumnHeader)sender).Column))
-                return;
-
-            if (e.NewSize.Width <= 60)
-            {
-                e.Handled = true;
-                ((GridViewColumnHeader)sender).Column.Width = 0;
-                ((GridViewColumnHeader)sender).Column.Width = 60;
-            }
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth((GridViewColumnHeader)sender);
-            TaskQStatusColumnWidth = ((GridViewColumnHeader)sender).Column.Width;
-        }
-
-        private void grdTaskQErrorMsgColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!ChoGridViewColumnVisibilityManager.GetIsVisible(((GridViewColumnHeader)sender).Column))
-                return;
-
-            if (e.NewSize.Width <= 60)
-            {
-                e.Handled = true;
-                ((GridViewColumnHeader)sender).Column.Width = 0;
-                ((GridViewColumnHeader)sender).Column.Width = 60;
-            }
-            ChoGridViewColumnVisibilityManager.SetGridColumnWidth((GridViewColumnHeader)sender);
-            TaskQErrorMsgColumnWidth = ((GridViewColumnHeader)sender).Column.Width;
-        }
-
-        private void btnOpenTaskLogFile_Click(object sender, RoutedEventArgs e)
-        {
-            OpenTaskLogFile();
-        }
-
-        private void mnuTaskQOpenLogFile_Click(object sender, RoutedEventArgs e)
-        {
-            OpenTaskLogFile();
-        }
-
-        private void OpenTaskLogFile()
-        {
-            if (_selectedTaskQueueItem != null && File.Exists(_selectedTaskQueueItem.LogFilePath))
-            {
-                try
-                {
-                    Process.Start("notepad.exe", _selectedTaskQueueItem.LogFilePath);
-                }
-                catch { }
-            }
-        }
-
-        private void btnOpenTaskLogFolder_Click(object sender, RoutedEventArgs e)
-        {
-            OpenTaskLogFolder();
-        }
-
-        private void OpenTaskLogFolder()
-        {
-            try
-            {
-                Process.Start("explorer.exe", ChoTaskQueueItemLogInfo.AppLogFolder);
-            }
-            catch { }
-
         }
     }
 
@@ -2724,66 +1884,7 @@ namespace ChoEazyCopy
             return tmp;
         }
     }
-    public class BooleanToVisibilityConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is Boolean && (bool)value)
-            {
-                return Visibility.Visible;
-            }
-            return Visibility.Collapsed;
-        }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is Visibility && (Visibility)value == Visibility.Visible)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
-    public class BooleanToVisibilityInverterConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is Boolean && (bool)value)
-            {
-                return Visibility.Collapsed;
-            }
-            return Visibility.Visible;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is Visibility && (Visibility)value == Visibility.Visible)
-            {
-                return false;
-            }
-            return true;
-        }
-    }
-    public class BooleanToVisibilityInverterConverterEx : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is Boolean && (bool)value)
-            {
-                return Visibility.Hidden;
-            }
-            return Visibility.Visible;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is Visibility && (Visibility)value == Visibility.Visible)
-            {
-                return false;
-            }
-            return true;
-        }
-    }
     public class ExtendedPropertyGrid : PropertyGrid
     {
         protected override void OnFilterChanged(string oldValue, string newValue)
@@ -2846,8 +1947,8 @@ namespace ChoEazyCopy
             _accent = "Steel";
         }
         private static string _theme;
-        public static string Theme
-        {
+        public static string Theme 
+        { 
             get { return _theme; }
             set
             {
@@ -2877,19 +1978,4 @@ namespace ChoEazyCopy
         }
     }
 
-    public static class FileSizeFormatter
-    {
-        static readonly string[] suffixes = { "Bytes", "KB", "MB", "GB", "TB", "PB" };
-        public static string FormatSize(Int64 bytes)
-        {
-            int counter = 0;
-            decimal number = (decimal)bytes;
-            while (Math.Round(number / 1024) >= 1)
-            {
-                number = number / 1024;
-                counter++;
-            }
-            return string.Format("{0:n1}{1}", number, suffixes[counter]);
-        }
-    }
 }
